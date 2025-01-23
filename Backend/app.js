@@ -1,5 +1,5 @@
 import express from 'express'
-import { errorHandler } from ".+"
+
 
 const app = express();
 
@@ -9,6 +9,7 @@ app.use(express.urlencoded({extended: true, limit: "16kb"}))
 // routes
 
 import userRouter from "./routes/user.routes.js"
+import { errorHandler } from "./middlewares/error.middleware.js"
 
 
 app.use("/api/v1/users", userRouter)
