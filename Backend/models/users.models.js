@@ -6,7 +6,7 @@ const UserSchema = new Schema (
         username: {
             type: String,
             required: true,
-            unique: true,
+            unique: [true, "username already exists, please try another username"],
             lowercase: true,
             trim: true,
             index: true
@@ -31,7 +31,12 @@ const UserSchema = new Schema (
         registrationNumber: {
             type: String,
             required: true,
+            unique: [true, "Registration number already exists"],
             trim: true,
+            match: [
+                 /^202[0-4]\/(hnd|nd)\/\d{5}\/[a-zA-Z]{2}$/,
+                'Invalid registration number format. Expected format: Year/HND-or-ND/regNumber/departmentAbbreviation YYYY/HND-or-ND/#####/XX', 
+            ],
         },
         password: {
             type: String,
@@ -45,7 +50,12 @@ const UserSchema = new Schema (
         phoneNumber: {
             type: Number,
             required: true,
-            trim: true
+            unique: [true, "Phonenumber already exists"],
+            trim: true,
+            match: [
+                /^(070|080|090|081|091)\d{8}$/,
+                'Phone number must be 11 digits and start with one of the valid prefixes: 070, 080, 090, 081, 091.',
+            ],
         },
         school: {
             type: String,
