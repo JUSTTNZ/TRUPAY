@@ -1,9 +1,11 @@
-import { asyncHandler } from "../utils/asyncHandler";
-import { ApiError } from "../utils/ApiError";
-import  { ApiResponse } from "../utils/ApiResponse";
-import { User } from "../models/user.model";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { ApiError } from "../utils/ApiError.js";
+import  { ApiResponse } from "../utils/ApiResponse.js";
+import { User } from "../models/users.models.js";
 
-const ge
+const generateAccessToken = async(userId) => {
+    
+}
 
 const registerUser = asyncHandler(async (req, res) => {
     const {fullname, email, username, password, phoneNumber, school, department, level, registrationNumber} = req.body;
