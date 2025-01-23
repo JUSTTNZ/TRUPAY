@@ -3,7 +3,7 @@ import { ApiError } from "../utils/ApiError.js";
 import  { ApiResponse } from "../utils/ApiResponse.js";
 import { User } from "../models/users.models.js";
 
-const generateAccessToken = async(userId) => {
+const generateAccessAndRefreshToken = async(userId) => {
     try {
         const user = await User.findById(userId)
 
@@ -70,7 +70,7 @@ const loginUser = asyncHandler(async(req, res) => {
     const {email, username, registrationNumber, password} = req.body
 
     if(
-        [email, username, registrationNumber, password].some((field) => field.trim() === "")
+        [email, username, registrationNumber, password].some((field) => field?.trim() === "")
     ) {
         throw new ApiError(400, "Please provide required fields")
     }
@@ -89,6 +89,18 @@ const loginUser = asyncHandler(async(req, res) => {
 
     if(!user) {
         throw new ApiError(401, "Invalid credentials")
+    }
+
+    try {
+        const validatePassword = await user.comparePassword(password)
+        console.log("validatePassword", validatePassword);
+
+        if(!validatePassword) {
+            throw new ApiError(401, "Invalid credentials")
+        }
+    } catch (error) {
+        console.log("Error validating password", error);
+        throw new ApiError(401, "Error validating password", error)
     }
 
     try {
