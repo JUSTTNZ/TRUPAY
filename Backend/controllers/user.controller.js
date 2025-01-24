@@ -109,7 +109,7 @@ const loginUser = asyncHandler(async(req, res) => {
         const loggedInUser =  await User.findById(user._id).select("-password -refreshToken")
 
         if(!loggedInUser) {
-            throw new ApiError(401, "Something went wrong while logging in")
+            throw new ApiError(401, "Something went wrong while user was logging in")
         }
 
         const options = {
