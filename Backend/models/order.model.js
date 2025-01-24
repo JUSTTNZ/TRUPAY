@@ -16,7 +16,8 @@ const orderSchema = new Schema({
     status: {
         type: String,
         enum: ["pending", "collected"],
-        required: [true, "status is required and should have a status of either 'pending' or 'collected'"]
+        required: [true, "status is required and should have a status of either 'pending' or 'collected'"],
+        default: "pending"
     },
     total_price: {
         type: Number,
@@ -25,7 +26,8 @@ const orderSchema = new Schema({
     payment_status: {
         type: String,
         enum: ["success", "failed", "pending"],
-        required: [true, "payment_status is requird and should have a status of either ;success', 'failed' or 'pending'"]
+        required: [true, "payment_status is requird and should have a status of either ;success', 'failed' or 'pending'"],
+        default: "pending"
     }
 }, opts)
 
