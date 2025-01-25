@@ -54,7 +54,7 @@ const registerUser = asyncHandler(async (req, res) => {
         const createdUser = await User.findById(user._id).select("-password -refreshToken")
 
         if(!createdUser) {
-            throw new ApiError(401, "Something went wrong while registering user")
+            throw new ApiError(401, "Something went wrong while registering user sorry")
         }
 
         return res
@@ -109,7 +109,7 @@ const loginUser = asyncHandler(async(req, res) => {
         const loggedInUser =  await User.findById(user._id).select("-password -refreshToken")
 
         if(!loggedInUser) {
-            throw new ApiError(401, "Something went wrong while logging in")
+            throw new ApiError(401, "Something went wrong while user was logging in")
         }
 
         const options = {
