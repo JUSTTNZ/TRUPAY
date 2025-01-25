@@ -11,14 +11,14 @@ const commentSchema = new Schema({
     book_id: {
         type: mongoose.Schema.Types.ObjectId,
         required: [true, "book_id is required."],
-        ref: "User"
+        ref: "Book"
     },
     comment: {
         type: String,
         required: [true, "comment is required."],
     },
     rating: {
-        type: String,
+        type: Number,
         required: [true, "rating is required."]
     }
 })
