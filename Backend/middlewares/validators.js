@@ -89,14 +89,13 @@ const transactionValidator = async (req, _res, next) => {
     next()
 }
 
-const userRegistrationValidator = async (req, _res, next) => {
+const userRegisterValidator = async (req, _res, next) => {
     const userSchema = Joi.object({
         username: Joi.string().required(),
         email: Joi.string().required(),
         fullname: Joi.string().required(),
         registrationNumber: Joi.string().required(),
         password: Joi.string().required(),
-        //role: Joi.string().required(),
         phoneNumber: Joi.string().required(),
         school: Joi.string().required(),
         department: Joi.string().required(),
@@ -120,7 +119,7 @@ const userLoginValidator = async (req, _res, next) => {
 };
 
 
-export {
+export default {
     bookValidator,
     categoryValidator,
     commentValidator,
@@ -129,6 +128,6 @@ export {
     orderItemValidator,
     schoolValidator,
     transactionValidator,
-    userRegistrationValidator,
-    userLoginValidator
+    userLoginValidator,
+    userRegisterValidator
 }
