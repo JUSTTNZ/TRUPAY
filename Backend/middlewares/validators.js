@@ -89,22 +89,34 @@ const transactionValidator = async (req, _res, next) => {
     next()
 }
 
-const registerUserValidator = async (req, _res, next) => {
+const userRegisterValidator = async (req, _res, next) => {
     const userSchema = Joi.object({
         username: Joi.string().required(),
         email: Joi.string().required(),
         fullname: Joi.string().required(),
         registrationNumber: Joi.string().required(),
         password: Joi.string().required(),
-        phoneNumber: Joi.number().required(),
+        phoneNumber: Joi.string().required(),
         school: Joi.string().required(),
         department: Joi.string().required(),
         level: Joi.string().required()
-    })
+    });
 
     await userSchema.validateAsync(req.body, { abortEarly: false });
     next();
-}
+};
+
+const userLoginValidator = async (req, _res, next) => {
+    const loginSchema = Joi.object({
+        email: Joi.string().email().optional(),
+        username: Joi.string().optional(),
+        registrationNumber: Joi.string().optional(),
+        password: Joi.string().required()
+    }).or('email', 'username', 'registrationNumber');
+
+    await loginSchema.validateAsync(req.body, { abortEarly: false });
+    next();
+};
 
 
 export default {
@@ -116,5 +128,6 @@ export default {
     orderItemValidator,
     schoolValidator,
     transactionValidator,
-    registerUserValidator
+    userLoginValidator,
+    userRegisterValidator
 }

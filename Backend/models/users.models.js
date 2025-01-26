@@ -73,7 +73,7 @@ const UserSchema = new Schema(
         level: {
             type: String,
             required: true,
-            upperCase: true,
+            uppercase: true,
             enum: ['ND1', 'ND2', 'HND1', 'HND2']
         },
     },
