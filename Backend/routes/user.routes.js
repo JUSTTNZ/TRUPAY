@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { verifyJWT } from 
+import { verifyJWT } from '../middlewares/auth.middlewares.js'
 import {
     registerUser,
     loginUser,
@@ -10,6 +10,6 @@ const router = Router()
 
 router.route("/register").post(registerUser)
 router.route("/login").post(loginUser)
-router.route("/logout").post(logOutUser)
+router.route("/logout").post(verifyJWT, logOutUser)
 
 export default router
