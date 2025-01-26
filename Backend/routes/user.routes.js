@@ -5,10 +5,13 @@ import {
     loginUser,
     logOutUser
 } from "../controllers/user.controller.js"
+import validator from "../middlewares/validators.js";
 
-const router = Router()
+const router = Router();
 
-router.route("/register").post(registerUser)
+//test endpoint
+router.post("/register", validator.userRegisterValidator, registerUser);
+
 router.route("/login").post(loginUser)
 router.route("/logout").post(verifyJWT, logOutUser)
 
