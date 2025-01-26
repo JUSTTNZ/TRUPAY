@@ -1,9 +1,9 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import validator from 'validator'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
-const UserSchema = new Schema (
+const UserSchema = new Schema(
     {
         username: {
             type: String,
@@ -34,10 +34,11 @@ const UserSchema = new Schema (
             type: String,
             required: true,
             unique: [true, "Registration number already exists"],
+            uppercase: true,
             trim: true,
             match: [
-                 /^202[0-4]\/(hnd|nd)\/\d{5}\/[a-zA-Z]{2}$/,
-                'Invalid registration number format. Expected format: Year/HND-or-ND/regNumber/departmentAbbreviation YYYY/HND-or-ND/#####/XX', 
+                /^202[0-4]\/(HND|ND)\/\d{5}\/[a-zA-Z]{2}$/,
+                'Invalid registration number format. Expected format: Year/HND-or-ND/regNumber/departmentAbbreviation YYYY/HND-or-ND/#####/XX',
             ],
         },
         password: {
@@ -50,7 +51,7 @@ const UserSchema = new Schema (
             default: 'user'
         },
         phoneNumber: {
-            type: Number,
+            type: String,
             required: true,
             unique: [true, "Phonenumber already exists"],
             trim: true,
@@ -76,25 +77,24 @@ const UserSchema = new Schema (
             enum: ['ND1', 'ND2', 'HND1', 'HND2']
         },
     },
-    {timestamps: true}
+    { timestamps: true }
 )
 
-UserSchema.pre("save", async function(next) {
-    if(!this.isModified("password")) return next();
-    
+UserSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) return next();
+
     this.password = await bcrypt.hash(this.password, 10)
-    console.log("password", this.password);
-    
+
     next();
 })
 
-UserSchema.methods.comparePassword = async function(enteredPassword) {
-    console.log("enteredPassword", enteredPassword);
+
+UserSchema.methods.comparePassword = async function (enteredPassword) {
 
     return await bcrypt.compare(enteredPassword, this.password)
 }
 
-UserSchema.methods.generateAccessToken = function() {
+UserSchema.methods.generateAccessToken = function () {
     // short lived token
 
     return jwt.sign({
@@ -109,7 +109,7 @@ UserSchema.methods.generateAccessToken = function() {
     })
 }
 
-UserSchema.methods.generateRefreshToken = function() {
+UserSchema.methods.generateRefreshToken = function () {
     // long lived token
 
     return jwt.sign({
