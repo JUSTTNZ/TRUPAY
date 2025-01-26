@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { verifyJWT}
+import { verifyJWT } from 
 import {
     registerUser,
     loginUser,
