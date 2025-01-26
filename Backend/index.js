@@ -1,5 +1,5 @@
 //this package is used to handle all asynchronous errors.
-// require("express-async-errors") //yet to be installed
+import 'express-async-errors';
 import dotenv from 'dotenv'
 import { app } from './app.js';
 import connectDB from './db/index.js';
