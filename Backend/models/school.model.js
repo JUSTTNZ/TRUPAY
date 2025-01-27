@@ -1,9 +1,9 @@
 import mongoose, { Schema } from "mongoose";
 
-const opts = { timestamps: trure };
+const opts = { timestamps: true };
 
 const schoolSchema = new Schema({
-    name: {
+    schoolName: {
         type: String,
         required: [true, "name is required"],
         trim: true
