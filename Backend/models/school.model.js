@@ -3,20 +3,16 @@ import mongoose, { Schema } from "mongoose";
 const opts = { timestamps: true };
 
 const schoolSchema = new Schema({
-    schoolName: {
+    name: {
         type: String,
-        required: [true, "name is required"],
+        required: true,
+        unique: true,
         trim: true
     },
-    description: {
-        type: String,
-        required: [true, "description is required"],
-        trim: true
-    }
+    users: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
 }, { opts })
 
-
-
-
-
-export default mongoose.model("School", schoolSchema)
+export const School = mongoose.model("School", schoolSchema)
