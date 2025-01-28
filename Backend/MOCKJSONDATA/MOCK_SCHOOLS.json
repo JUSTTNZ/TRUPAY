@@ -2,11 +2,12 @@
     {
         "name": "School of Engineering Technology",
         "departments": [
-            "Civil Engineering",
-            "Computer Engineering",
-            "Electrical/Electronics Engineering",
-            "Mechanical Engineering",
-            "Mechatronics Engineering"
+            "Civil Engineering Technology",
+            "Computer Engineering Technology",
+            "Electrical/Electronics Engineering Technology",
+            "Mechanical Engineering Technology",
+            "Mechatronics Engineering Technology",
+            "Metallurgical Engineering Technology"
             
         ]
     },
@@ -15,12 +16,8 @@
         "departments": [
             "Science Laboratory Technology",
             "Computer Science",
-            "Food Technology",
             "Mathematics and Statistics",
-            "Hospitality Management",
-            "Agricultural Technology",
-            "Glass and Ceramics Technology",
-            "Agricultural Technology"
+            "Pharmaceutical Technology"
         ]
     },
     {
@@ -36,22 +33,34 @@
         ]
     },
     {
-        "name": "School of Agriculture and Agricultural Technology",
+        "name": "School of Industrial Technology",
         "departments": [
             
-            "Animal Health and Production Technology",
-            "Fisheries Technology"
+            "Animal Production",
+            "Fisheries Technology",
+            "Food Technology",
+            "Ceramics and Glass Technology",
+            "Hospitality Management",
+            "Agricultural Technology",
+            "Horticulture and Landscaping Technology"
         ]
     },
     {
-        "name": "School of Environmental Design and Technology",
+        "name": "School of General Studies",
+        "departments": [
+            "Languages",
+            "Legal Studies"
+        ]
+    },
+    {
+        "name": "School of Environmental Design and Valuation",
         "departments": [
             "Architecture Technology",
             "Building Technology",
-            "Estate Management Technology",
-            "Quantity Surveying Technology",
-            "Urban and Regional Planning Technology",
-            "Surveying and Geo-Informatics Technology",
+            "Estate Management",
+            "Quantity Surveying",
+            "Urban and Regional Planning",
+            "Surveying and Geo-Informatics",
             "Arts and Design Technology"
         ]
     }
