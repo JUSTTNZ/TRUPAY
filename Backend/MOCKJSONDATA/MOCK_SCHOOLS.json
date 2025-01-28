@@ -1,0 +1,58 @@
+[
+    {
+        "name": "School of Engineering Technology",
+        "departments": [
+            "Civil Engineering",
+            "Computer Engineering",
+            "Electrical/Electronics Engineering",
+            "Mechanical Engineering",
+            "Mechatronics Engineering"
+            
+        ]
+    },
+    {
+        "name": "School of Science",
+        "departments": [
+            "Science Laboratory Technology",
+            "Computer Science",
+            "Food Technology",
+            "Mathematics and Statistics",
+            "Hospitality Management",
+            "Agricultural Technology",
+            "Glass and Ceramics Technology",
+            "Agricultural Technology"
+        ]
+    },
+    {
+        "name": "School of Business",
+        "departments": [
+            "Accountancy",
+            "Business Administration and Management",
+            "Library and Information Science",
+            "Marketing",
+            "Office Technology and Management",
+            "Public Administration",
+            "Mass Communication"
+        ]
+    },
+    {
+        "name": "School of Agriculture and Agricultural Technology",
+        "departments": [
+            
+            "Animal Health and Production Technology",
+            "Fisheries Technology"
+        ]
+    },
+    {
+        "name": "School of Environmental Design and Technology",
+        "departments": [
+            "Architecture Technology",
+            "Building Technology",
+            "Estate Management Technology",
+            "Quantity Surveying Technology",
+            "Urban and Regional Planning Technology",
+            "Surveying and Geo-Informatics Technology",
+            "Arts and Design Technology"
+        ]
+    }
+]
