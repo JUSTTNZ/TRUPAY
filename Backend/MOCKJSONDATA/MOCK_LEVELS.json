@@ -1,0 +1,530 @@
+[
+    {
+        "name": "ND1",
+        "department": "Civil Engineering Technology"
+    },
+    {
+        "name": "ND2",
+        "department": "Civil Engineering Technology"
+    },
+    {
+        "name": "HND1",
+        "department": "Civil Engineering Technology"
+    },
+    {
+        "name": "HND2",
+        "department": "Civil Engineering Technology"
+    },
+    {
+        "name": "ND1",
+        "department": "Computer Engineering Technology"
+    },
+    {
+        "name": "ND2",
+        "department": "Computer Engineering Technology"
+    },
+    {
+        "name": "HND1",
+        "department": "Computer Engineering Technology"
+    },
+    {
+        "name": "HND2",
+        "department": "Computer Engineering Technology"
+    },
+    {
+        "name": "ND1",
+        "department": "Electrical/Electronics Engineering Technology"
+    },
+    {
+        "name": "ND2",
+        "department": "Electrical/Electronics Engineering Technology"
+    },
+    {
+        "name": "HND1",
+        "department": "Electrical/Electronics Engineering Technology"
+    },
+    {
+        "name": "HND2",
+        "department": "Electrical/Electronics Engineering Technology"
+    },
+    {
+        "name": "ND1",
+        "department": "Mechanical Engineering Technology"
+    },
+    {
+        "name": "ND2",
+        "department": "Mechanical Engineering Technology"
+    },
+    {
+        "name": "HND1",
+        "department": "Mechanical Engineering Technology"
+    },
+    {
+        "name": "HND2",
+        "department": "Mechanical Engineering Technology"
+    },
+    {
+        "name": "ND1",
+        "department": "Mechatronics Engineering Technology"
+    },
+    {
+        "name": "ND2",
+        "department": "Mechatronics Engineering Technology"
+    },
+    {
+        "name": "HND1",
+        "department": "Mechatronics Engineering Technology"
+    },
+    {
+        "name": "HND2",
+        "department": "Mechatronics Engineering Technology"
+    },
+    {
+        "name": "ND1",
+        "department": "Metallurgical Engineering Technology"
+    },
+    {
+        "name": "ND2",
+        "department": "Metallurgical Engineering Technology"
+    },
+    {
+        "name": "HND1",
+        "department": "Metallurgical Engineering Technology"
+    },
+    {
+        "name": "HND2",
+        "department": "Metallurgical Engineering Technology"
+    },
+    {
+        "name": "ND1",
+        "department": "Science Laboratory Technology"
+    },
+    {
+        "name": "ND2",
+        "department": "Science Laboratory Technology"
+    },
+    {
+        "name": "HND1",
+        "department": "Science Laboratory Technology"
+    },
+    {
+        "name": "HND2",
+        "department": "Science Laboratory Technology"
+    },
+    {
+        "name": "ND1",
+        "department": "Computer Science"
+    },
+    {
+        "name": "ND2",
+        "department": "Computer Science"
+    },
+    {
+        "name": "HND1",
+        "department": "Computer Science"
+    },
+    {
+        "name": "HND2",
+        "department": "Computer Science"
+    },
+    {
+        "name": "ND1",
+        "department": "Mathematics and Statistics"
+    },
+    {
+        "name": "ND2",
+        "department": "Mathematics and Statistics"
+    },
+    {
+        "name": "HND1",
+        "department": "Mathematics and Statistics"
+    },
+    {
+        "name": "HND2",
+        "department": "Mathematics and Statistics"
+    },
+    {
+        "name": "ND1",
+        "department": "Pharmaceutical Technology"
+    },
+    {
+        "name": "ND2",
+        "department": "Pharmaceutical Technology"
+    },
+    {
+        "name": "HND1",
+        "department": "Pharmaceutical Technology"
+    },
+    {
+        "name": "HND2",
+        "department": "Pharmaceutical Technology"
+    },
+    {
+        "name": "ND1",
+        "department": "Accountancy"
+    },
+    {
+        "name": "ND2",
+        "department": "Accountancy"
+    },
+    {
+        "name": "HND1",
+        "department": "Accountancy"
+    },
+    {
+        "name": "HND2",
+        "department": "Accountancy"
+    },
+    {
+        "name": "ND1",
+        "department": "Business Administration and Management"
+    },
+    {
+        "name": "ND2",
+        "department": "Business Administration and Management"
+    },
+    {
+        "name": "HND1",
+        "department": "Business Administration and Management"
+    },
+    {
+        "name": "HND2",
+        "department": "Business Administration and Management"
+    },
+    {
+        "name": "ND1",
+        "department": "Library and Information Science"
+    },
+    {
+        "name": "ND2",
+        "department": "Library and Information Science"
+    },
+    {
+        "name": "HND1",
+        "department": "Library and Information Science"
+    },
+    {
+        "name": "HND2",
+        "department": "Library and Information Science"
+    },
+    {
+        "name": "ND1",
+        "department": "Marketing"
+    },
+    {
+        "name": "ND2",
+        "department": "Marketing"
+    },
+    {
+        "name": "HND1",
+        "department": "Marketing"
+    },
+    {
+        "name": "HND2",
+        "department": "Marketing"
+    },
+    {
+        "name": "ND1",
+        "department": "Office Technology and Management"
+    },
+    {
+        "name": "ND2",
+        "department": "Office Technology and Management"
+    },
+    {
+        "name": "HND1",
+        "department": "Office Technology and Management"
+    },
+    {
+        "name": "HND2",
+        "department": "Office Technology and Management"
+    },
+    {
+        "name": "ND1",
+        "department": "Public Administration"
+    },
+    {
+        "name": "ND2",
+        "department": "Public Administration"
+    },
+    {
+        "name": "HND1",
+        "department": "Public Administration"
+    },
+    {
+        "name": "HND2",
+        "department": "Public Administration"
+    },
+    {
+        "name": "ND1",
+        "department": "Mass Communication"
+    },
+    {
+        "name": "ND2",
+        "department": "Mass Communication"
+    },
+    {
+        "name": "HND1",
+        "department": "Mass Communication"
+    },
+    {
+        "name": "HND2",
+        "department": "Mass Communication"
+    },
+    {
+        "name": "ND1",
+        "department": "Animal Production"
+    },
+    {
+        "name": "ND2",
+        "department": "Animal Production"
+    },
+    {
+        "name": "HND1",
+        "department": "Animal Production"
+    },
+    {
+        "name": "HND2",
+        "department": "Animal Production"
+    },
+    {
+        "name": "ND1",
+        "department": "Fisheries Technology"
+    },
+    {
+        "name": "ND2",
+        "department": "Fisheries Technology"
+    },
+    {
+        "name": "HND1",
+        "department": "Fisheries Technology"
+    },
+    {
+        "name": "HND2",
+        "department": "Fisheries Technology"
+    },
+    {
+        "name": "ND1",
+        "department": "Food Technology"
+    },
+    {
+        "name": "ND2",
+        "department": "Food Technology"
+    },
+    {
+        "name": "HND1",
+        "department": "Food Technology"
+    },
+    {
+        "name": "HND2",
+        "department": "Food Technology"
+    },
+    {
+        "name": "ND1",
+        "department": "Ceramics and Glass Technology"
+    },
+    {
+        "name": "ND2",
+        "department": "Ceramics and Glass Technology"
+    },
+    {
+        "name": "HND1",
+        "department": "Ceramics and Glass Technology"
+    },
+    {
+        "name": "HND2",
+        "department": "Ceramics and Glass Technology"
+    },
+    {
+        "name": "ND1",
+        "department": "Hospitality Management"
+    },
+    {
+        "name": "ND2",
+        "department": "Hospitality Management"
+    },
+    {
+        "name": "HND1",
+        "department": "Hospitality Management"
+    },
+    {
+        "name": "HND2",
+        "department": "Hospitality Management"
+    },
+    {
+        "name": "ND1",
+        "department": "Agricultural Technology"
+    },
+    {
+        "name": "ND2",
+        "department": "Agricultural Technology"
+    },
+    {
+        "name": "HND1",
+        "department": "Agricultural Technology"
+    },
+    {
+        "name": "HND2",
+        "department": "Agricultural Technology"
+    },
+    {
+        "name": "ND1",
+        "department": "Horticulture and Landscaping Technology"
+    },
+    {
+        "name": "ND2",
+        "department": "Horticulture and Landscaping Technology"
+    },
+    {
+        "name": "HND1",
+        "department": "Horticulture and Landscaping Technology"
+    },
+    {
+        "name": "HND2",
+        "department": "Horticulture and Landscaping Technology"
+    },
+    {
+        "name": "ND1",
+        "department": "Languages"
+    },
+    {
+        "name": "ND2",
+        "department": "Languages"
+    },
+    {
+        "name": "HND1",
+        "department": "Languages"
+    },
+    {
+        "name": "HND2",
+        "department": "Languages"
+    },
+    {
+        "name": "ND1",
+        "department": "Legal Studies"
+    },
+    {
+        "name": "ND2",
+        "department": "Legal Studies"
+    },
+    {
+        "name": "HND1",
+        "department": "Legal Studies"
+    },
+    {
+        "name": "HND2",
+        "department": "Legal Studies"
+    },
+    {
+        "name": "ND1",
+        "department": "Architecture Technology"
+    },
+    {
+        "name": "ND2",
+        "department": "Architecture Technology"
+    },
+    {
+        "name": "HND1",
+        "department": "Architecture Technology"
+    },
+    {
+        "name": "HND2",
+        "department": "Architecture Technology"
+    },
+    {
+        "name": "ND1",
+        "department": "Building Technology"
+    },
+    {
+        "name": "ND2",
+        "department": "Building Technology"
+    },
+    {
+        "name": "HND1",
+        "department": "Building Technology"
+    },
+    {
+        "name": "HND2",
+        "department": "Building Technology"
+    },
+    {
+        "name": "ND1",
+        "department": "Estate Management"
+    },
+    {
+        "name": "ND2",
+        "department": "Estate Management"
+    },
+    {
+        "name": "HND1",
+        "department": "Estate Management"
+    },
+    {
+        "name": "HND2",
+        "department": "Estate Management"
+    },
+    {
+        "name": "ND1",
+        "department": "Quantity Surveying"
+    },
+    {
+        "name": "ND2",
+        "department": "Quantity Surveying"
+    },
+    {
+        "name": "HND1",
+        "department": "Quantity Surveying"
+    },
+    {
+        "name": "HND2",
+        "department": "Quantity Surveying"
+    },
+    {
+        "name": "ND1",
+        "department": "Urban and Regional Planning"
+    },
+    {
+        "name": "ND2",
+        "department": "Urban and Regional Planning"
+    },
+    {
+        "name": "HND1",
+        "department": "Urban and Regional Planning"
+    },
+    {
+        "name": "HND2",
+        "department": "Urban and Regional Planning"
+    },
+    {
+        "name": "ND1",
+        "department": "Surveying and Geo-Informatics"
+    },
+    {
+        "name": "ND2",
+        "department": "Surveying and Geo-Informatics"
+    },
+    {
+        "name": "HND1",
+        "department": "Surveying and Geo-Informatics"
+    },
+    {
+        "name": "HND2",
+        "department": "Surveying and Geo-Informatics"
+    },
+    {
+        "name": "ND1",
+        "department": "Arts and Design Technology"
+    },
+    {
+        "name": "ND2",
+        "department": "Arts and Design Technology"
+    },
+    {
+        "name": "HND1",
+        "department": "Arts and Design Technology"
+    },
+    {
+        "name": "HND2",
+        "department": "Arts and Design Technology"
+    }
+]
