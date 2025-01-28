@@ -1,0 +1,134 @@
+[
+    {
+        "name": "Civil Engineering Technology",
+        "school": "School of Engineering Technology"
+    },
+    {
+        "name": "Computer Engineering Technology",
+        "school": "School of Engineering Technology"
+    },
+    {
+        "name": "Electrical/Electronics Engineering Technology",
+        "school": "School of Engineering Technology"
+    },
+    {
+        "name": "Mechanical Engineering Technology",
+        "school": "School of Engineering Technology"
+    },
+    {
+        "name": "Mechatronics Engineering Technology",
+        "school": "School of Engineering Technology"
+    },
+    {
+        "name": "Metallurgical Engineering Technology",
+        "school": "School of Engineering Technology"
+    },
+    {
+        "name": "Science Laboratory Technology",
+        "school": "School of Science"
+    },
+    {
+        "name": "Computer Science",
+        "school": "School of Science"
+    },
+    {
+        "name": "Mathematics and Statistics",
+        "school": "School of Science"
+    },
+    {
+        "name": "Pharmaceutical Technology",
+        "school": "School of Science"
+    },
+    {
+        "name": "Accountancy",
+        "school": "School of Business"
+    },
+    {
+        "name": "Business Administration and Management",
+        "school": "School of Business"
+    },
+    {
+        "name": "Library and Information Science",
+        "school": "School of Business"
+    },
+    {
+        "name": "Marketing",
+        "school": "School of Business"
+    },
+    {
+        "name": "Office Technology and Management",
+        "school": "School of Business"
+    },
+    {
+        "name": "Public Administration",
+        "school": "School of Business"
+    },
+    {
+        "name": "Mass Communication",
+        "school": "School of Business"
+    },
+    {
+        "name": "Animal Production",
+        "school": "School of Industrial Technology"
+    },
+    {
+        "name": "Fisheries Technology",
+        "school": "School of Industrial Technology"
+    },
+    {
+        "name": "Food Technology",
+        "school": "School of Industrial Technology"
+    },
+    {
+        "name": "Ceramics and Glass Technology",
+        "school": "School of Industrial Technology"
+    },
+    {
+        "name": "Hospitality Management",
+        "school": "School of Industrial Technology"
+    },
+    {
+        "name": "Agricultural Technology",
+        "school": "School of Industrial Technology"
+    },
+    {
+        "name": "Horticulture and Landscaping Technology",
+        "school": "School of Industrial Technology"
+    },
+    {
+        "name": "Languages",
+        "school": "School of General Studies"
+    },
+    {
+        "name": "Legal Studies",
+        "school": "School of General Studies"
+    },
+    {
+        "name": "Architecture Technology",
+        "school": "School of Environmental Design and Valuation"
+    },
+    {
+        "name": "Building Technology",
+        "school": "School of Environmental Design and Valuation"
+    },
+    {
+        "name": "Estate Management",
+        "school": "School of Environmental Design and Valuation"
+    },
+    {
+        "name": "Quantity Surveying",
+        "school": "School of Environmental Design and Valuation"
+    },
+    {
+        "name": "Urban and Regional Planning",
+        "school": "School of Environmental Design and Valuation"
+    },
+    {
+        "name": "Surveying and Geo-Informatics",
+        "school": "School of Environmental Design and Valuation"
+    },
+    {
+        "name": "Arts and Design Technology",
+        "school": "School of Environmental Design and Valuation"
+    }
+]
