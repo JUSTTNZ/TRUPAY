@@ -61,20 +61,19 @@ const UserSchema = new Schema(
             ],
         },
         school: {
-            type: String,
-            required: true,
-            trim: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'School',
+        required: true
         },
         department: {
-            type: String,
-            required: true,
-            trim: true
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Department',
+            required: true
         },
         level: {
-            type: String,
-            required: true,
-            uppercase: true,
-            enum: ['ND1', 'ND2', 'HND1', 'HND2']
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Level',
+            required: true
         },
     },
     { timestamps: true }
