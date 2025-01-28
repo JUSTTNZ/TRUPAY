@@ -25,12 +25,11 @@ const start = async () => {
             schoolMap[school.name] = school._id;
         });
 
-        // Update mockDepartments to use ObjectId references
+        // Update mockDepartments to use ObjectId references and include schoolName
         const updatedDepartments = mockDepartments.map(department => {
             return {
                 ...department,
-                school: schoolMap[department.school],
-                 // Replace school name with ObjectId
+                school: schoolMap[department.school], // Replace school name with ObjectId
                 schoolName: department.school
             };
         });
@@ -44,20 +43,26 @@ const start = async () => {
             departmentMap[department.name] = department._id;
         });
 
-        // Update mockLevels to use ObjectId references
+        // Update mockLevels to use ObjectId references and include departmentName and schoolName
         const updatedLevels = mockLevels.map(level => {
+            const department = departments.find(d => d.name === level.department);
+            const school = schools.find(s => s._id.equals(department.school));
             return {
                 ...level,
                 department: departmentMap[level.department], // Replace department name with ObjectId
                 departmentName: level.department,
-                schoolName: level.schoolName
+                school: school._id, // Include school ObjectId
+                schoolName: school.name // Derive schoolName from department's school
             };
         });
 
         const levels = await Level.create(updatedLevels);
         console.log("Levels successfully uploaded");
+        console.log('Data import success');
+        process.exit(0);
     } catch (error) {
         console.error(error);
+        process.exit(1);
     }
 };
 

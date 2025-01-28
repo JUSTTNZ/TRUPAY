@@ -22,7 +22,11 @@ const levelSchema = new mongoose.Schema({
     schoolName: {
         type: String,
         required: true,
-    }
+    },
+    users: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }],
 }, { timestamps: true });
 
 const Level = mongoose.model('Level', levelSchema);
