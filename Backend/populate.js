@@ -1,107 +1,64 @@
 import dotenv from 'dotenv';
 // import User from './models/users.models.js';
-import School from './models/school.model.js';
-import Department from './models/department.model.js';
-import Level from './models/levels.model.js';
-const mockSchools = require('./MOCKJSONDATA/MOCK_SCHOOLS.json');
-const mockDepartments = require('./MOCKJSONDATA/MOCK_DEPARTMENTS.json');
-const mockLevels = require('./MOCKJSONDATA/MOCK_LEVELS.json');
-import { connectDB } from './db/index.js';
+import { School } from './models/school.model.js';
+import { Department } from './models/department.model.js';
+import { Level } from './models/levels.model.js';
+import mockSchools from './MOCKJSONDATA/MOCK_SCHOOLS.json' assert { type: 'json' };
+import mockDepartments from './MOCKJSONDATA/MOCK_DEPARTMENTS.json' assert { type: 'json' };
+import mockLevels from './MOCKJSONDATA/MOCK_LEVELS.json' assert { type: 'json' };
+import connectDB from './db/index.js';
 
 dotenv.config({
     path: "./.env"
-})
-
+});
 
 const start = async () => {
     try {
         await connectDB(process.env.MONGODB_URI);
 
-        const schools = await School.create(mockSchools)
+        const schools = await School.create(mockSchools);
         console.log("School successfully uploaded");
 
-        const departments  = await Department.create(mockDepartments)
+        // Create a map of school names to their ObjectId
+        const schoolMap = {};
+        schools.forEach(school => {
+            schoolMap[school.name] = school._id;
+        });
+
+        // Update mockDepartments to use ObjectId references
+        const updatedDepartments = mockDepartments.map(department => {
+            return {
+                ...department,
+                school: schoolMap[department.school],
+                 // Replace school name with ObjectId
+                schoolName: department.school
+            };
+        });
+
+        const departments = await Department.create(updatedDepartments);
         console.log("Department successfully uploaded");
 
-        const levels = await Level.create(mockLevels)
-        console.log(("Levels successfully uploaded"));
-        
-        for (let department of departments) {
-            const school = schools.find(s => s.name === department.school);
-            if (school) {
-                school.departments.push(department._id);
-                await school.save();
-            }
-        }
+        // Create a map of department names to their ObjectId
+        const departmentMap = {};
+        departments.forEach(department => {
+            departmentMap[department.name] = department._id;
+        });
 
-        for (let level of levels) {
-            const department = departments.find(d => d.name === level.department);
-            if (department) {
-                department.levels.push(level._id);
-                await department.save();
-            }
-        }
-            
-        console.log('Data import success');
-        process.exit(0);
+        // Update mockLevels to use ObjectId references
+        const updatedLevels = mockLevels.map(level => {
+            return {
+                ...level,
+                department: departmentMap[level.department], // Replace department name with ObjectId
+                departmentName: level.department,
+                schoolName: level.schoolName
+            };
+        });
+
+        const levels = await Level.create(updatedLevels);
+        console.log("Levels successfully uploaded");
     } catch (error) {
-        console.log(error);
-        process.exit(1);
+        console.error(error);
     }
-}
+};
 
 start();
-
-
-// require('dotenv').config();
-
-// const mockSchools = require('./MOCK_SCHOOLS.json');
-// const mockDepartments = require('./MOCK_DEPARTMENTS.json');
-// const mockLevels = require('./MOCK_LEVELS.json');
-// const School = require('./models/School');
-// const Department = require('./models/Department');
-// const Level = require('./models/Level');
-// const connectDB = require('./db/connect');
-
-// const start = async () => {
-//     try {
-//         await connectDB(process.env.MONGODB_URI);
-
-//         // Insert mock data for schools
-//         const schools = await School.create(mockSchools);
-//         console.log('Schools data import success');
-
-//         // Insert mock data for departments
-//         const departments = await Department.create(mockDepartments);
-//         console.log('Departments data import success');
-
-//         // Insert mock data for levels
-//         const levels = await Level.create(mockLevels);
-//         console.log('Levels data import success');
-
-//         // Optionally link departments and levels to schools and save again
-//         for (let department of departments) {
-//             const school = schools.find(s => s.name === department.school);
-//             if (school) {
-//                 school.departments.push(department._id);
-//                 await school.save();
-//             }
-//         }
-
-//         for (let level of levels) {
-//             const department = departments.find(d => d.name === level.department);
-//             if (department) {
-//                 department.levels.push(level._id);
-//                 await department.save();
-//             }
-//         }
-
-//         console.log('Data import success');
-//         process.exit(0);
-//     } catch (error) {
-//         console.log(error);
-//         process.exit(1);
-//     }
-// }
-
-// start();

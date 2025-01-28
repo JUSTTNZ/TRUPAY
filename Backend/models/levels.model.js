@@ -1,20 +1,30 @@
 import mongoose from 'mongoose';
 
-const LevelSchema = new mongoose.Schema({
+const levelSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        enum: ['ND1', 'ND2', 'HND1', 'HND2'],
     },
     department: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Department',
-        required: true
+        required: true,
     },
-    users: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }]
+    departmentName: {
+        type: String,
+        required: true,
+    },
+    school: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'School',
+            required: true
+        },
+    schoolName: {
+        type: String,
+        required: true,
+    }
 }, { timestamps: true });
 
-export const Level = mongoose.model("Level", LevelSchema);
+const Level = mongoose.model('Level', levelSchema);
+
+export { Level };
