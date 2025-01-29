@@ -7,12 +7,12 @@ import {
     refreshAccessToken,
     updateUserDetails
 } from "../controllers/user.controller.js"
-import validator from "../middlewares/validators.js";
+import { userRegisterValidator } from "../middlewares/validators.js";
 
 const router = Router();
 
 //test endpoint
-router.post("/register", validator.userRegisterValidator, registerUser);
+router.post("/register", userRegisterValidator, registerUser);
 
 router.route("/login").post(loginUser)
 

@@ -10,9 +10,10 @@ const schoolSchema = new Schema({
         trim: true
     },
     users: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }],
+        fullname: String,
+        departmentName: String,
+        levelName: String
+    }]
 }, { opts })
 
 export const School = mongoose.model("School", schoolSchema)
