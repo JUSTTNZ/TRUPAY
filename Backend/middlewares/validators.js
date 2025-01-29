@@ -124,9 +124,9 @@ const userRegisterValidator = async (req, res, next) => {
         await userSchema.validateAsync(req.body, { abortEarly: false });
 
         // Convert `school`, `department`, and `level` names to ObjectIds
-        req.body.school = await objectIdValidator(req.body.school, helpers, School);
-        req.body.department = await objectIdValidator(req.body.department, helpers, Department);
-        req.body.level = await objectIdValidator(req.body.level, helpers, Level);
+        req.body.school = await objectIdValidator(req.body.school, Joi, School);
+        req.body.department = await objectIdValidator(req.body.department, Joi, Department);
+        req.body.level = await objectIdValidator(req.body.level, Joi, Level);
 
         next();
     } catch (error) {
