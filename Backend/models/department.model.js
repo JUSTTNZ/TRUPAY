@@ -19,8 +19,8 @@ const departmentSchema = new Schema({
         trim: true
     },
     users: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        fullname: String,
+        levelName: String
     }]
 }, opts)
 

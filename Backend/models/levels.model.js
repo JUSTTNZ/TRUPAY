@@ -24,9 +24,8 @@ const levelSchema = new mongoose.Schema({
         required: true,
     },
     users: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        }],
+        fullname: String
+    }],
 }, { timestamps: true });
 
 const Level = mongoose.model('Level', levelSchema);
