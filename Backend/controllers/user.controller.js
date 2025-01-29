@@ -3,6 +3,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { User } from "../models/users.models.js";
 import userService from "../services/user.service.js";
+import validator from "../middlewares/validators.js";
 import jwt from "jsonwebtoken"
 
 const generateAccessAndRefreshToken = async (userId) => {
@@ -25,17 +26,29 @@ const generateAccessAndRefreshToken = async (userId) => {
 }
 
 //test endpoint
-const registerUser = async (req, res) => {
-    const userObject = req.body
-    const user = await userService.register(userObject);
-    res.json(new ApiResponse(201, "user created successfully", user));
-}
+const registerUser = async (req, res, next) => {
+    try {
+        // Validate user input and convert school/department/level to ObjectIds
+        await validator.userRegisterValidator(req, res, next);
+
+        const userObject = req.body;
+
+        // Create user
+        const user = await userService.register(userObject);
+
+        return res.status(201).json(new ApiResponse(201, "User created successfully", user));
+    } catch (error) {
+        console.error("Error registering user:", error);
+        next(error);
+    }
+};
+
 
 const loginUser = asyncHandler(async (req, res) => {
-    const { email, username, registrationNumber, password } = req.body
+    const { email, registrationNumber, password } = req.body
 
     if (
-        [email, username, registrationNumber, password].some((field) => field?.trim() === "")
+        [email, registrationNumber, password].some((field) => field?.trim() === "")
     ) {
         throw new ApiError(400, "Please provide required fields")
     }
@@ -45,9 +58,7 @@ const loginUser = asyncHandler(async (req, res) => {
     if (email) {
         user = await User.findOne({ email })
     }
-    else if (username) {
-        user = await User.findOne({ username })
-    }
+   
     else if (registrationNumber) {
         user = await User.findOne({ registrationNumber })
     }

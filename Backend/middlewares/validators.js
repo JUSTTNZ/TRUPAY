@@ -1,4 +1,22 @@
 import Joi from "joi"
+import mongoose from "mongoose";
+
+const objectIdValidator = async (value, helpers, model) => {
+    try {
+        const doc = await model.findOne({ name: value.trim() }); // Ensure trimming spaces
+
+        if (!doc) {
+            console.error(`Validation failed: ${value} not found in ${model.modelName} collection.`);
+            return helpers.error('any.invalid', { value });
+        }
+
+        return doc._id.toString(); // Return the ObjectId as a string
+    } catch (err) {
+        console.error(`Error in objectIdValidator: ${err.message}`);
+        return helpers.error('any.invalid', { value });
+    }
+};
+
 
 const bookValidator = async (req, _res, next) => {
     const bookSchema = Joi.object({
@@ -89,7 +107,7 @@ const transactionValidator = async (req, _res, next) => {
     next()
 }
 
-const userRegisterValidator = async (req, _res, next) => {
+const userRegisterValidator = async (req, res, next) => {
     const userSchema = Joi.object({
         username: Joi.string().required(),
         email: Joi.string().required(),
@@ -97,22 +115,34 @@ const userRegisterValidator = async (req, _res, next) => {
         registrationNumber: Joi.string().required(),
         password: Joi.string().required(),
         phoneNumber: Joi.string().required(),
-        school: Joi.string().required(),
+        school: Joi.string().required(), // Initially string, but will be converted to ObjectId
         department: Joi.string().required(),
         level: Joi.string().required()
     });
 
-    await userSchema.validateAsync(req.body, { abortEarly: false });
-    next();
+    try {
+        await userSchema.validateAsync(req.body, { abortEarly: false });
+
+        // Convert `school`, `department`, and `level` names to ObjectIds
+        req.body.school = await objectIdValidator(req.body.school, helpers, School);
+        req.body.department = await objectIdValidator(req.body.department, helpers, Department);
+        req.body.level = await objectIdValidator(req.body.level, helpers, Level);
+
+        next();
+    } catch (error) {
+        console.log(error);
+        
+        return res.status(400).json({ message: "Validation error occurred", errors: error.details });
+    }
 };
+
 
 const userLoginValidator = async (req, _res, next) => {
     const loginSchema = Joi.object({
         email: Joi.string().email().optional(),
-        username: Joi.string().optional(),
         registrationNumber: Joi.string().optional(),
         password: Joi.string().required()
-    }).or('email', 'username', 'registrationNumber');
+    }).or('email', 'registrationNumber');
 
     await loginSchema.validateAsync(req.body, { abortEarly: false });
     next();
