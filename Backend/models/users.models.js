@@ -61,19 +61,16 @@ const UserSchema = new Schema(
             ],
         },
         school: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'School',
-        required: true
+        _id: { type: mongoose.Schema.Types.ObjectId, ref: "School", required: true },
+        name: { type: String, required: true },
         },
         department: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Department',
-            required: true
+            _id: { type: mongoose.Schema.Types.ObjectId, ref: "Department", required: true },
+            name: { type: String, required: true },
         },
         level: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Level',
-            required: true
+            _id: { type: mongoose.Schema.Types.ObjectId, ref: "Level", required: true },
+            name: { type: String, required: true },
         },
     },
     { timestamps: true }

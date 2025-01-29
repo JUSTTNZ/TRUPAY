@@ -1,25 +1,7 @@
 import Joi from "joi"
 import { School } from '../models/school.model.js';
 import { Department } from '../models/department.model.js';
-import { Level } from '../models/level.model.js';
-import mongoose from "mongoose";
-
-const objectIdValidator = async (value, helpers, model) => {
-    try {
-        const doc = await model.findOne({ name: value.trim() }); // Ensure trimming spaces
-
-        if (!doc) {
-            console.error(`Validation failed: ${value} not found in ${model.modelName} collection.`);
-            return helpers.error('any.invalid', { value });
-        }
-
-        return doc._id.toString(); // Return the ObjectId as a string
-    } catch (err) {
-        console.error(`Error in objectIdValidator: ${err.message}`);
-        return helpers.error('any.invalid', { value });
-    }
-};
-
+import { Level } from '../models/levels.model.js';
 
 const bookValidator = async (req, _res, next) => {
     const bookSchema = Joi.object({
@@ -113,12 +95,12 @@ const transactionValidator = async (req, _res, next) => {
 const userRegisterValidator = async (req, res, next) => {
     const userSchema = Joi.object({
         username: Joi.string().required(),
-        email: Joi.string().required(),
+        email: Joi.string().email().required(),
         fullname: Joi.string().required(),
         registrationNumber: Joi.string().required(),
         password: Joi.string().required(),
         phoneNumber: Joi.string().required(),
-        school: Joi.string().required(), // Initially string, but will be converted to ObjectId
+        school: Joi.string().required(),
         department: Joi.string().required(),
         level: Joi.string().required()
     });
@@ -126,18 +108,27 @@ const userRegisterValidator = async (req, res, next) => {
     try {
         await userSchema.validateAsync(req.body, { abortEarly: false });
 
-        // Convert `school`, `department`, and `level` names to ObjectIds
-        req.body.school = await objectIdValidator(req.body.school, Joi, School);
-        req.body.department = await objectIdValidator(req.body.department, Joi, Department);
-        req.body.level = await objectIdValidator(req.body.level, Joi, Level);
+        // Fetch the school, department, and level details
+        const schoolDoc = await School.findOne({ name: req.body.school.trim() });
+        const departmentDoc = await Department.findOne({ name: req.body.department.trim() });
+        const levelDoc = await Level.findOne({ name: req.body.level.trim() });
+
+        if (!schoolDoc || !departmentDoc || !levelDoc) {
+            return res.status(400).json({ message: "Invalid school, department, or level" });
+        }
+
+        // Store both ObjectId and name
+        req.body.school = { _id: schoolDoc._id, name: schoolDoc.name };
+        req.body.department = { _id: departmentDoc._id, name: departmentDoc.name };
+        req.body.level = { _id: levelDoc._id, name: levelDoc.name };
 
         next();
     } catch (error) {
         console.log(error);
-        
-        return res.status(400).json({ message: "Validation error occurred", errors: error.details });
+        return res.status(400).json({ message: "Validation error occurred", errors: error.message });
     }
 };
+
 
 
 const userLoginValidator = async (req, _res, next) => {
@@ -152,7 +143,7 @@ const userLoginValidator = async (req, _res, next) => {
 };
 
 
-export default {
+export {
     bookValidator,
     categoryValidator,
     commentValidator,

@@ -3,7 +3,6 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { User } from "../models/users.models.js";
 import userService from "../services/user.service.js";
-import validator from "../middlewares/validators.js";
 import jwt from "jsonwebtoken"
 
 const generateAccessAndRefreshToken = async (userId) => {
@@ -29,7 +28,6 @@ const generateAccessAndRefreshToken = async (userId) => {
 const registerUser = async (req, res, next) => {
     try {
         // Validate user input and convert school/department/level to ObjectIds
-        await validator.userRegisterValidator(req, res, next);
 
         const userObject = req.body;
 
@@ -39,9 +37,10 @@ const registerUser = async (req, res, next) => {
         return res.status(201).json(new ApiResponse(201, "User created successfully", user));
     } catch (error) {
         console.error("Error registering user:", error);
-        next(error);
+        return res.status(500).json({ message: "An error occurred while registering user", error: error.message });
     }
 };
+
 
 
 const loginUser = asyncHandler(async (req, res) => {
