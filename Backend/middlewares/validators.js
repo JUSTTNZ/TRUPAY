@@ -1,4 +1,7 @@
 import Joi from "joi"
+import { School } from '../models/school.model.js';
+import { Department } from '../models/department.model.js';
+import { Level } from '../models/level.model.js';
 import mongoose from "mongoose";
 
 const objectIdValidator = async (value, helpers, model) => {
