@@ -19,6 +19,6 @@ router.route("/login").post(loginUser)
 // secured routes
 router.route("/logout").post(verifyJWT, logOutUser)
 router.route("refreshToken").post(verifyJWT, refreshAccessToken)
-router.route("/updateUserDetails").post(verifyJWT, updateUserDetails)
+router.route("/updateUserDetails").patch(verifyJWT, updateUserDetails)
 
 export default router
