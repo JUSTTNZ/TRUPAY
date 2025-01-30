@@ -14,7 +14,7 @@ export const Navbar = () => {
     return(
 <header className={`flex justify-between z-50 items-center fixed top-0 p-4 lg:pl-[120px] lg:pr-[100px] z-10 w-full font-outfit  `}
     style={{
-        background: 'linear-gradient(107.19deg, #10375C 79.13%, #EB8317 99.07%)',
+        background: 'linear-gradient(107.19deg, #10375C 62.13%, #EB8317 110.07%)',
     }}
 >
   
