@@ -194,36 +194,28 @@ const changeUserCurrentPassword = asyncHandler(async(req,res) => {
 const updateUserDetails = asyncHandler(async(req, res) => {
     const { email, fullname, phoneNumber, level } = req.body
 
-    if(!email) {
-        throw new ApiError(400, "Email field is required")
+    if(
+        [email, fullname, phoneNumber, level].some((field) => field?.trim() === "")
+    ) {
+        throw new ApiError(400, "Please provide required fields")
     }
 
-    if(!fullname) {
-        throw new ApiError(400, "fullname field is required")
+    let user = await User.findById(req.user?._id)
+    if(!user) {
+        throw new ApiError(400, "User not found")
     }
 
-    if(!phoneNumber) {
-        throw new ApiError(400, " phoneNumber field is required")
-    }
+    const updateDetails = {}
+    if(email) updateDetails.email = email;
+    if(fullname) updateDetails.fullname = fullname;
+    if(phoneNumber) updateDetails.phoneNumber = phoneNumber
+    if(level) updateDetails.level = level
 
-    if(!level) {
-        throw new ApiError(400, "level field is required")
-    }
-
-    const user = await User.findByIdAndUpdate(req.user?._id,
-        {
-            $set: {
-                email,
-                fullname,
-                phoneNumber,
-                level
-            }
-        },
-        {
-            new: true
-        },
-    ).select("-password, -refreshToken")
-
+    user = await User.findByIdAndUpdate(
+        req.user?._id,
+        { $set: updateDetails },
+        { new: true }
+    )
     return res
     .status(200)
     .json(new ApiResponse(200, user, "Account details updated successfully"))
