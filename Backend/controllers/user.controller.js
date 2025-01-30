@@ -230,7 +230,7 @@ const updateUserDetails = asyncHandler(async(req, res) => {
         }
 
         if(updatedFields.length === 0) {
-            throw new ApiError(400, "Please provide fields to update")
+            throw new ApiError(400, "No new details provided for update, please provide new details to update details")
         }
 
         user = await User.findByIdAndUpdate(
