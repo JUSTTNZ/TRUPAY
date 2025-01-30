@@ -192,7 +192,7 @@ const changeUserCurrentPassword = asyncHandler(async(req,res) => {
 })
 
 const updateUserDetails = asyncHandler(async(req, res) => {
-    const { email, fullname, phonenumber, level } = req.body
+    const { email, fullname, phoneNumber, level } = req.body
 
     if(
         [email, fullname, phoneNumber, level].some((field) => field?.trim() === "")
@@ -205,20 +205,45 @@ const updateUserDetails = asyncHandler(async(req, res) => {
         throw new ApiError(400, "User not found")
     }
 
+    let compareDetails = await User.findById(req.user?._id)
+    if(!compareDetails) {
+        throw new ApiError(400, "User not found")
+    }
     const updateDetails = {}
-    if(email) updateDetails.email = email;
-    if(fullname) updateDetails.fullname = fullname;
-    if(phoneNumber) updateDetails.phonenumber = phonenumber
-    if(level) updateDetails.level = level
+    const updatedFields = [];
 
-    user = await User.findByIdAndUpdate(
-        req.user?._id,
-        { $set: updateDetails },
-        { new: true }
-    )
-    return res
-    .status(200)
-    .json(new ApiResponse(200, user, "Account details updated successfully"))
+        if (email && email !== compareDetails.email) {
+            updateDetails.email = email;
+            updatedFields.push('email');
+        }
+        if (fullname && fullname !== compareDetails.fullname) {
+            updateDetails.fullname = fullname;
+            updatedFields.push('fullname');
+        }
+        if (phoneNumber && phoneNumber !== compareDetails.phoneNumber) {
+            updateDetails.phoneNumber = phoneNumber;
+            updatedFields.push('phoneNumber');
+        }
+        if (level && level !== compareDetails.level) {
+            updateDetails.level = level;
+            updatedFields.push('level');
+        }
+
+        if(updatedFields.length === 0) {
+            throw new ApiError(400, "Please provide fields to update")
+        }
+
+        user = await User.findByIdAndUpdate(
+            req.user?._id,
+            { $set: updateDetails },
+            { new: true }
+        )
+
+        const updatedFieldString = updatedFields.join(', ')    
+        const message = updatedFields > 1 ? `${updatedFieldString} details updated successfully` : `${updatedFieldString} updated successfully`
+        return res
+        .status(200)
+        .json(new ApiResponse(200, user, message))
 })
 
 
