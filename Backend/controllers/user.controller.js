@@ -63,7 +63,7 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 
     if (!user) {
-        throw new ApiError(401, "Invalid credentials")
+        throw new ApiError(401, "Invalid user credentials")
     }
 
     try {
@@ -170,13 +170,13 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 })
 
 const changeUserCurrentPassword = asyncHandler(async(req,res) => {
-    console.log(oldPassword, newPassword);
     
     const { oldPassword, newPassword } = req.body
+    console.log(oldPassword, newPassword);
 
     const user = await User.findById(req.user?._id)
 
-    const isPasswordValid = await user.isPasswordValid(oldPassword)
+    const isPasswordValid = await user.comparePassword(oldPassword)
 
     if(!isPasswordValid) {
         throw new ApiError(401, "New password does not match the old password")
@@ -194,35 +194,22 @@ const changeUserCurrentPassword = asyncHandler(async(req,res) => {
 const updateUserDetails = asyncHandler(async(req, res) => {
     const { email, fullname, phoneNumber, level } = req.body
 
-    if(!email) {
-        throw new ApiError(400, "Email field is required")
+    if(
+        [email, fullname, phoneNumber, level].some((field) => field?.trim() === "")
+    ) {
+        throw new ApiError(400, "Please provide required fields")
     }
 
-    if(!fullname) {
-        throw new ApiError(400, "fullname field is required")
-    }
+    let user = await User.findById(req.user?._id);
 
-    if(!phoneNumber) {
-        throw new ApiError(400, " phoneNumber field is required")
-    }
+    const updateFields = {};
 
-    if(!level) {
-        throw new ApiError(400, "level field is required")
-    }
+    if(email) updateFields.email = email;
+    if(fullname) updateFields.fullname = fullname;
+    if(phoneNumber) updateFields.phoneNumber = phoneNumber;
+    if(level) updateFields.level = level;
 
-    const user = await User.findByIdAndUpdate(req.user?._id,
-        {
-            $set: {
-                email,
-                fullname,
-                phoneNumber,
-                level
-            }
-        },
-        {
-            new: true
-        },
-    ).select("-password, -refreshToken")
+    
 
     return res
     .status(200)
