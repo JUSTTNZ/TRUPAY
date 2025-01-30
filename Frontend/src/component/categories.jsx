@@ -1,5 +1,6 @@
 import maths from '../assets/maths.png'
 import sci from '../assets/science.png'
+import { TopPick } from './toppicks'
 export const Categories = () => {
     return(
         <div className='pt-10' style={{
@@ -9,6 +10,7 @@ export const Categories = () => {
 
    
         <div className="flex-col lg:pl-[120px] lg:pr-[100px]">
+            <div className='mb-10'>
             <h5 className="font-bold font-outfit text-center text-[40px] text-white mb-5">Categories</h5>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-4">
              <div className=" bg-[#EB8317] rounded-[35px] p-4 lg:w-[331px] w-full">
@@ -51,7 +53,10 @@ export const Categories = () => {
             </div>
              </div>
             </div>
+            </div>
+          
         </div>
+        <TopPick />
         </div>
     )
 }
