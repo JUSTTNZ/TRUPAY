@@ -71,11 +71,11 @@ const loginUser = asyncHandler(async (req, res) => {
         console.log("validatePassword", validatePassword);
 
         if (!validatePassword) {
-            throw new ApiError(401, "Invalid credentials")
+            throw new ApiError(401, "Invalid credentials ")
         }
     } catch (error) {
         console.log("Error validating password", error);
-        throw new ApiError(401, "Error validating password", error)
+        throw new ApiError(401, "Wrong password, password does not match", error)
     }
 
     try {
