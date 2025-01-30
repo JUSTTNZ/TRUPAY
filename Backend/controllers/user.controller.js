@@ -192,7 +192,7 @@ const changeUserCurrentPassword = asyncHandler(async(req,res) => {
 })
 
 const updateUserDetails = asyncHandler(async(req, res) => {
-    const { email, fullname, phoneNumber, level } = req.body
+    const { email, fullname, phonenumber, level } = req.body
 
     if(
         [email, fullname, phoneNumber, level].some((field) => field?.trim() === "")
@@ -208,7 +208,7 @@ const updateUserDetails = asyncHandler(async(req, res) => {
     const updateDetails = {}
     if(email) updateDetails.email = email;
     if(fullname) updateDetails.fullname = fullname;
-    if(phoneNumber) updateDetails.phoneNumber = phoneNumber
+    if(phoneNumber) updateDetails.phonenumber = phonenumber
     if(level) updateDetails.level = level
 
     user = await User.findByIdAndUpdate(
