@@ -71,11 +71,11 @@ const loginUser = asyncHandler(async (req, res) => {
         console.log("validatePassword", validatePassword);
 
         if (!validatePassword) {
-            throw new ApiError(401, "Invalid credentials")
+            throw new ApiError(401, "Invalid credentials ")
         }
     } catch (error) {
         console.log("Error validating password", error);
-        throw new ApiError(401, "Error validating password", error)
+        throw new ApiError(401, "Wrong password, password does not match", error)
     }
 
     try {
@@ -200,20 +200,50 @@ const updateUserDetails = asyncHandler(async(req, res) => {
         throw new ApiError(400, "Please provide required fields")
     }
 
-    let user = await User.findById(req.user?._id);
+    let user = await User.findById(req.user?._id)
+    if(!user) {
+        throw new ApiError(400, "User not found")
+    }
 
-    const updateFields = {};
+    let compareDetails = await User.findById(req.user?._id)
+    if(!compareDetails) {
+        throw new ApiError(400, "User not found")
+    }
+    const updateDetails = {}
+    const updatedFields = [];
 
-    if(email) updateFields.email = email;
-    if(fullname) updateFields.fullname = fullname;
-    if(phoneNumber) updateFields.phoneNumber = phoneNumber;
-    if(level) updateFields.level = level;
+        if (email && email !== compareDetails.email) {
+            updateDetails.email = email;
+            updatedFields.push('email');
+        }
+        if (fullname && fullname !== compareDetails.fullname) {
+            updateDetails.fullname = fullname;
+            updatedFields.push('fullname');
+        }
+        if (phoneNumber && phoneNumber !== compareDetails.phoneNumber) {
+            updateDetails.phoneNumber = phoneNumber;
+            updatedFields.push('phoneNumber');
+        }
+        if (level && level !== compareDetails.level) {
+            updateDetails.level = level;
+            updatedFields.push('level');
+        }
 
-    
+        if(updatedFields.length === 0) {
+            throw new ApiError(400, "No new details provided for update, please provide new details to update details")
+        }
 
-    return res
-    .status(200)
-    .json(new ApiResponse(200, user, "Account details updated successfully"))
+        user = await User.findByIdAndUpdate(
+            req.user?._id,
+            { $set: updateDetails },
+            { new: true }
+        )
+
+        const updatedFieldString = updatedFields.join(', ')    
+        const message = updatedFields > 1 ? `${updatedFieldString} details updated successfully` : `${updatedFieldString} updated successfully`
+        return res
+        .status(200)
+        .json(new ApiResponse(200, user, message))
 })
 
 
