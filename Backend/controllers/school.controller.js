@@ -42,57 +42,50 @@ import { User } from '../models/users.models.js'
 //     }
 // })
 
-const getAllSchools = asyncHandler(async(req, res) => {
-    const {search, sort} = req.query
-
+const getAllSchools = asyncHandler(async (req, res) => {
     try {
-        const queryObject = {}
+        let result = School.find().select('-users');
 
-        if(search) {
-            queryObject.name = { $regex: search, $options: 'i'};
+        // Sorting
+        const sort = req.query.sort;
+        if (sort === 'a-z') {
+            result = result.sort('name');
+        } else if (sort === 'z-a') {
+            result = result.sort('-name');
         }
 
-        let result = School.find(queryObject)
+        // Pagination
+        const page = Number(req.query.page) || 1;
+        const limit = Number(req.query.limit) || 10;
+        const skip = (page - 1) * limit;
 
-        if(sort === 'a-z') {
-            result = result.sort('name')
-        }
+        result = result.skip(skip).limit(limit);
+        const schools = await result; // Await the final query
 
-        if(sort === 'z-a') {
-            result = result.sort('-name')
-        }
-
-        const page = Number(req.query.page) || 1
-        const limit = Number(req.query.limit) || 10
-        const skip = (page - 1) * limit
-
-        result.skip(skip).limit(Number(limit))
-
-        const schools = await result;
-        const totalSchools = School.countDocuments(queryObject)
+        const totalSchools = await School.countDocuments(); // Fix undefined queryObject
         const numOfPages = Math.ceil(totalSchools / limit);
 
-        res
-        .status(200)
-        .json({ schools, totalSchools, numOfPages })
-
+        res.status(200).json({ schools, totalSchools, numOfPages });
     } catch (error) {
-        throw new  ApiError(500, "Failed to fetch schools")
+        console.error("Error fetching schools:", error);
+        throw new ApiError(500, error.message || "Failed to fetch schools");
     }
-})
+});
+
 
 const getSchool = (async(req, res) => {
     const { name } = req.params;
 
     try {
-        const school = School.findOne({name})
+        const school = await School.findOne({name: new RegExp(`^${name}$`, 'i')}).select('-users')
 
         if(!school) {
             throw new ApiError(404, `No school found with name ${name}`)
         }
 
         return res
-        .status(200, { school })
+        .status(200)
+        .json(new ApiResponse(200, "School found", school))
     } catch (error) {
         throw new ApiError(404, "School not found")
     }
