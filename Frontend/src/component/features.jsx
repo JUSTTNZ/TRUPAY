@@ -13,7 +13,7 @@ Features
 The features of TRUPAY are as seamless and convenient as possible. They help the students make easy payment with various options like paying with their bank card or mobile app, it has diverse range of textbooks to pick from
 </span>
             </div>
-<div className="grid grid-cols-4 lg:grid-cols-2 gap-[50px] p-10 ">
+<div className="grid grid-cols-2 lg:grid-cols-2 gap-[50px] p-10 ">
     <div className='flex-col'>
     <div className="rounded-[26px] w-[100px] h-[100px] flex  justify-center items-center " style={{
     background: `linear-gradient(143.2deg, #EB8317 22.06%, #10375C 84.07%)`
