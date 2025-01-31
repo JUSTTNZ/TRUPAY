@@ -11,11 +11,13 @@ app.use(cookieParser())
 
 import userRouter from "./routes/user.routes.js"
 import schoolRouter from "./routes/school.routes.js"
+import departmentRouter from "./routes/department.routes.js"
 import { errorHandler } from "./middlewares/error.middleware.js"
 
 
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/schools", schoolRouter)
+app.use("/api/v1/departments", departmentRouter)
 
 app.use(errorHandler)
 
