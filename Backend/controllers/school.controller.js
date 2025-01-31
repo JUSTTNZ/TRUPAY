@@ -77,7 +77,7 @@ const getSchool = (async(req, res) => {
     const { name } = req.params;
 
     try {
-        const school = await School.findOne({name})
+        const school = await School.findOne({name: new RegExp(`^${name}$`, 'i')}).select('-users')
 
         if(!school) {
             throw new ApiError(404, `No school found with name ${name}`)
