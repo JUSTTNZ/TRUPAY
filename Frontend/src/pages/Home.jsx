@@ -4,6 +4,7 @@ import homeImg1 from '../assets/vector1.png'
 import { Features } from "../component/features"
 import { Categories } from "../component/categories"
 import { Works } from "../component/work"
+import { Footer } from "../component/footer"
 
 export const Home = () => {
     return(
@@ -47,6 +48,7 @@ export const Home = () => {
         </div>
         <Categories />
         <Works />
+        <Footer />
         </>
     )
 }
