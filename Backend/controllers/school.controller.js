@@ -43,33 +43,30 @@ import { User } from '../models/users.models.js'
 // })
 
 const getAllSchools = asyncHandler(async(req, res) => {
-    const {search, sort} = req.query
+    //const {search, sort} = req.query
 
     try {
-        const queryObject = {}
+        
+        
+        let result = School.find();
 
-        if(search) {
-            queryObject.name = { $regex: search, $options: 'i'};
+        // Sorting
+        const sort = req.query.sort;
+        if (sort === 'a-z') {
+            result = result.sort('name');
+        } else if (sort === 'z-a') {
+            result = result.sort('-name');
         }
 
-        let result = School.find(queryObject)
-
-        if(sort === 'a-z') {
-            result = result.sort('name')
-        }
-
-        if(sort === 'z-a') {
-            result = result.sort('-name')
-        }
 
         const page = Number(req.query.page) || 1
         const limit = Number(req.query.limit) || 10
         const skip = (page - 1) * limit
 
-        result.skip(skip).limit(Number(limit))
+        result = result.skip(skip).limit(Number(limit))
 
         const schools = await result;
-        const totalSchools = School.countDocuments(queryObject)
+        const totalSchools = await School.countDocuments(queryObject)
         const numOfPages = Math.ceil(totalSchools / limit);
 
         res
@@ -85,14 +82,15 @@ const getSchool = (async(req, res) => {
     const { name } = req.params;
 
     try {
-        const school = School.findOne({name})
+        const school = await School.findOne({name})
 
         if(!school) {
             throw new ApiError(404, `No school found with name ${name}`)
         }
 
         return res
-        .status(200, { school })
+        .status(200)
+        .json(new ApiResponse(200, "School found", school))
     } catch (error) {
         throw new ApiError(404, "School not found")
     }
