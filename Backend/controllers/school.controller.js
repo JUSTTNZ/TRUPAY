@@ -44,7 +44,7 @@ import { User } from '../models/users.models.js'
 
 const getAllSchools = asyncHandler(async (req, res) => {
     try {
-        let result = School.find().select('.users');
+        let result = School.find().select('-users');
 
         // Sorting
         const sort = req.query.sort;
