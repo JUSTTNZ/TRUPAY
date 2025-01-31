@@ -15,7 +15,7 @@ import { errorHandler } from "./middlewares/error.middleware.js"
 
 
 app.use("/api/v1/users", userRouter)
-app.use("api/v1/schools", schoolRouter)
+app.use("/api/v1/schools", schoolRouter)
 
 app.use(errorHandler)
 
