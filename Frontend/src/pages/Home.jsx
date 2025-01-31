@@ -1,7 +1,9 @@
 import { Navbar } from "../component/navbar"
 import homeImg from '../assets/home.png'
-import homeImg1 from '../assets/vector.png'
+import homeImg1 from '../assets/vector1.png'
 import { Features } from "../component/features"
+import { Categories } from "../component/categories"
+import { Works } from "../component/work"
 
 export const Home = () => {
     return(
@@ -17,10 +19,10 @@ export const Home = () => {
         Get your textbooks
         without the hassle!
         </h4>
-        <div className="">
-            <img src={homeImg1} alt="Home Image 1" className=" h-auto" />
+        <div className="relative top-[-20px]">
+            <img src={homeImg1} alt="Home Image 1" className=" h-auto mb-6" />
         </div>
-        <div className="pt-3">
+        <div className="pt-3 mb-8">
             <h5 className="text-white font-bold text-[15px]">
             Pay for your textbooks at affordable prices and at your convenience
             </h5>
@@ -43,6 +45,8 @@ export const Home = () => {
         </div>
      <Features />
         </div>
+        <Categories />
+        <Works />
         </>
     )
 }
