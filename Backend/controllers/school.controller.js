@@ -43,15 +43,19 @@ import { User } from '../models/users.models.js'
 // })
 
 const getAllSchools = asyncHandler(async(req, res) => {
-    //const {search, sort} = req.query
-
     try {
-        
-        
-        let result = School.find();
+        const {search, sort} = req.query
+        const queryObject = {}
+
+        if(search) {
+            queryObject.name = { $regex: search , $options: 'i'}
+        }
+
+
+        let result = School.find(queryObject);
 
         // Sorting
-        const sort = req.query.sort;
+        //const sort = req.query.sort;
         if (sort === 'a-z') {
             result = result.sort('name');
         } else if (sort === 'z-a') {
