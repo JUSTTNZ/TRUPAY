@@ -43,6 +43,7 @@ import { User } from '../models/users.models.js'
 // })
 
 const getAllSchools = asyncHandler(async (req, res) => {
+    
     try {
         let result = School.find().select('-users');
 
