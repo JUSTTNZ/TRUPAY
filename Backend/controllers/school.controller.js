@@ -2,7 +2,7 @@ import { School } from '../models/school.model.js'
 import { asyncHandler } from '../utils/asyncHandler.js'
 import { ApiError } from '../utils/ApiError.js'
 import { ApiResponse } from '../utils/ApiResponse.js'
-import { User } from '../models/users.models.js'
+
 
 // const createSchool = asyncHandler(async(req, res) => {
 //     const {registrationNumber} = req.query
@@ -43,11 +43,18 @@ import { User } from '../models/users.models.js'
 // })
 
 const getAllSchools = asyncHandler(async (req, res) => {
+    
     try {
-        let result = School.find().select('-users');
+        const {search, sort} = req.query
+        const queryObject = {};
+
+        if(search) {
+            queryObject.name = { $regex: search, $options: 'i'}
+        }
+        let result = School.find(queryObject).select('-users');
 
         // Sorting
-        const sort = req.query.sort;
+        //const sort = req.query.sort;
         if (sort === 'a-z') {
             result = result.sort('name');
         } else if (sort === 'z-a') {
@@ -60,9 +67,9 @@ const getAllSchools = asyncHandler(async (req, res) => {
         const skip = (page - 1) * limit;
 
         result = result.skip(skip).limit(limit);
-        const schools = await result; // Await the final query
+        const schools = await result; 
 
-        const totalSchools = await School.countDocuments(); // Fix undefined queryObject
+        const totalSchools = await School.countDocuments(); 
         const numOfPages = Math.ceil(totalSchools / limit);
 
         res.status(200).json({ schools, totalSchools, numOfPages });
