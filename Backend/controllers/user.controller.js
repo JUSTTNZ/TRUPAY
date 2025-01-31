@@ -63,7 +63,7 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 
     if (!user) {
-        throw new ApiError(401, "Invalid credentials")
+        throw new ApiError(401, "Invalid user credentials")
     }
 
     try {
@@ -170,13 +170,13 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 })
 
 const changeUserCurrentPassword = asyncHandler(async(req,res) => {
-    console.log(oldPassword, newPassword);
     
     const { oldPassword, newPassword } = req.body
+    console.log(oldPassword, newPassword);
 
     const user = await User.findById(req.user?._id)
 
-    const isPasswordValid = await user.isPasswordValid(oldPassword)
+    const isPasswordValid = await user.comparePassword(oldPassword)
 
     if(!isPasswordValid) {
         throw new ApiError(401, "New password does not match the old password")
