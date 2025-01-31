@@ -57,7 +57,7 @@ const getDepartment = asyncHandler(async(req, res) => {
             throw new ApiError(400, "department not found")
         }
 
-        if(user.school._id?.toString() !== department.school._id?.toString()) {
+        if(user.school._id.toString() !== department.school._id.toString()) {
             throw new ApiError(401, "Cant access unknown department")
         }
         
