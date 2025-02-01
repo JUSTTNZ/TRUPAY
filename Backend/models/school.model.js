@@ -1,22 +1,19 @@
 import mongoose, { Schema } from "mongoose";
 
-const opts = { timestamps: trure };
+const opts = { timestamps: true };
 
 const schoolSchema = new Schema({
     name: {
         type: String,
-        required: [true, "name is required"],
+        required: true,
+        unique: true,
         trim: true
     },
-    description: {
-        type: String,
-        required: [true, "description is required"],
-        trim: true
-    }
+    users: [{
+        fullname: String,
+        departmentName: String,
+        levelName: String
+    }]
 }, { opts })
 
-
-
-
-
-export default mongoose.model("School", schoolSchema)
+export const School = mongoose.model("School", schoolSchema)
