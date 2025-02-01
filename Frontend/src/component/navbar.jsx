@@ -12,7 +12,11 @@ export const Navbar = () => {
    
   
     return(
-<header className={`flex justify-between z-50 items-center fixed top-0 p-4 lg:pl-[150px] lg:pr-[150px] z-10 w-full font-outfit bg-[#10375C] `}>
+<header className={`flex justify-between z-50 items-center fixed top-0 p-4 lg:pl-[120px] lg:pr-[100px] z-10 w-full font-outfit  `}
+    style={{
+        background: 'linear-gradient(107.19deg, #10375C 62.13%, #EB8317 110.07%)',
+    }}
+>
   
     <a className="text-[24px] font-bold text-start font-outfit   text-[#EB8317]  p-2" href="/">
         <span>TRUPAY</span>
@@ -66,22 +70,34 @@ export const Navbar = () => {
         </ul>
     </nav>
 
-    {/* Buttons Container */}
-    <ul className={`flex ml-auto lg:mr-20 ${menuOpen ? 'hidden' : 'hidden lg:flex'}`}>
+    <ul className={`flex ml-auto lg:mr-10 ${menuOpen ? 'hidden' : 'hidden lg:flex'}`}>
         <li className={`${menuOpen ? 'mb-3' : ''}`}>
             <a 
                 href='/#'
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-[#615c61] inline-flex items-center text-sm  font-poppins   font-semibold px-8 py-3  transition-colors duration-200 cursor-pointer"
+                className="text-[#EB8317] inline-flex items-center rounded-full text-sm  font-poppins   font-semibold px-6 py-2 bg-transparent  transition-colors duration-200 hover:bg-[#EB8317] border-[#EB8317] border-1 hover:text-white cursor-pointer"
             >
-              <span ><BsCart className='w-[24px] h-[24px] text-white'  /></span>
+          Login
+            </a>
+
+
+        </li>
+        <li className={` lg:px-3${menuOpen ? 'mb-3 ' : ''}`}>
+            <a 
+                href='/#'
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-white inline-flex items-center rounded-full text-sm  font-poppins   font-semibold px-6 py-2 bg-[#EB8317]  transition-colors duration-200 hover:bg-[#EB8317] border-[#EB8317] border-1 hover:text-white cursor-pointer"
+            >
+          Sign Up
             </a>
 
 
         </li>
        
     </ul>
+
 </header>
     )
 }

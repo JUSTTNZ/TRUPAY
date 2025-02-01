@@ -8,7 +8,7 @@ import {
 
 const router = Router();
 
-router.route("/").get(getAllSchools);
+router.route("/").get(verifyJWT, getAllSchools);
 router.route("/:name").get(verifyJWT, getSchool);
 
 export default router
