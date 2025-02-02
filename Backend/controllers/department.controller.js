@@ -33,11 +33,12 @@ const getAllDepartments = asyncHandler(async(req, res) => {
 
     const department = await result
     const totalNumOfDepartment = await Department.countDocuments();
+    const totalNumOfQueriedDepartment = department.length;
     const NumOfPages = Math.ceil(totalNumOfDepartment / limit)
 
     return res
     .status(200)
-    .json(new ApiResponse(201, {department, totalNumOfDepartment, NumOfPages}))
+    .json(new ApiResponse(201, {department, totalNumOfDepartment, totalNumOfQueriedDepartment, NumOfPages}))
 
 })
 
