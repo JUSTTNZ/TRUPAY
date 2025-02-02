@@ -42,15 +42,18 @@ import { ApiResponse } from '../utils/ApiResponse.js'
 //     }
 // })
 
-const getAllSchools = asyncHandler(async (req, res) => {
-    
+
+const getAllSchools = asyncHandler(async(req, res) => {
     try {
         const {search, sort} = req.query
-        const queryObject = {};
+        const queryObject = {}
 
         if(search) {
-            queryObject.name = { $regex: search, $options: 'i'}
+            queryObject.name = { $regex: search , $options: 'i'}
         }
+
+
+
         let result = School.find(queryObject).select('-users');
 
         // Sorting
