@@ -41,13 +41,33 @@ const getAllDepartments = asyncHandler(async(req, res) => {
 
 })
 
+const getAllSchoolDepartments = asyncHandler(async(req, res) => {
+    try {
+        const user = await User.findById(req.user?._id).populate('school')
+
+        if(!user) {
+            throw new ApiError(401, "User not found")
+        }
+
+        schoolId = user.school._id
+        const departments = await Department.find(schoolId).select('-users')
+
+        return res 
+        .status(200)
+        .json(new ApiResponse(201, departments, "Departments uploaded successfully"))
+    } catch (error) {
+        console.log(error.message)
+        throw new ApiError(400, "An error occurred")
+    }
+})
+
 const getDepartment = asyncHandler(async(req, res) => {
     try {
         const {name} = req.params
         if(!name) {
             throw new ApiError(400, "Please input name of department")
         }
-        const user = await User.findById(req.user._id).populate('school, department')
+        const user = await User.findById(req.user._id).populate('school department')
         if(!user) {
             throw new ApiError(401, "User not found")
         }
@@ -57,8 +77,13 @@ const getDepartment = asyncHandler(async(req, res) => {
             throw new ApiError(400, "department not found")
         }
 
-        if(user.school._id.toString() !== department.school._id.toString()) {
-            throw new ApiError(401, "Cant access unknown department")
+        if (!user.department || !user.department._id) {
+            throw new ApiError(401, "You do not have a department assigned");
+        }
+            
+
+        if(user.department._id.toString() !== department._id.toString()) {
+            throw new ApiError(401, "You can only access your own department");
         }
         
         return res
@@ -66,12 +91,13 @@ const getDepartment = asyncHandler(async(req, res) => {
         .json(new ApiResponse(201, department, "Department uploaded successfully"))
     } catch (error) {
         console.log(error.message);
-        throw new ApiError(400, "Error occurred while searching for department")
+        throw new ApiError(400, "You can only access your own department")
     }
 })
 
 export {
     getAllDepartments,
+    getAllSchoolDepartments,
     getDepartment
 }
 
