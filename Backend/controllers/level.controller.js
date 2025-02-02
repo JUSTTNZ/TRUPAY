@@ -4,8 +4,8 @@ import { ApiError } from "../utils/ApiError.js"
 import { ApiResponse } from "../utils/ApiResponse.js"
 
 
-getAllLevels = asyncHandler(async(req, res) => {
-    const levels = await Level.find()
+const getAllLevels = asyncHandler(async(req, res) => {
+    const levels = await Level.findById().selec
 
     if(!levels.length) {
         throw new ApiError(401, "No levels found")
@@ -15,3 +15,5 @@ getAllLevels = asyncHandler(async(req, res) => {
     .status(200)
     .json(new ApiResponse(201, levels, "Levels uploaded successfully"))
 })
+
+export { getAllLevels}
