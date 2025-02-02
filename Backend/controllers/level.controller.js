@@ -5,7 +5,7 @@ import { ApiResponse } from "../utils/ApiResponse.js"
 
 
 const getAllLevels = asyncHandler(async(req, res) => {
-    const levels = await Level.findById().selec
+    const levels = await Level.findById().select
 
     if(!levels.length) {
         throw new ApiError(401, "No levels found")
