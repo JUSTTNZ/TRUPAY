@@ -1,5 +1,5 @@
 import { Router }  from "express";
-import { verifyJWT } from "../middlewares/auth.middlewares.js";
+//import { verifyJWT } from "../middlewares/auth.middlewares.js";
 
 import {
     getAllSchools,
@@ -8,7 +8,7 @@ import {
 
 const router = Router();
 
-router.route("/").get(verifyJWT, getAllSchools);
-router.route("/:name").get(verifyJWT, getSchool);
+router.route("/").get(getAllSchools);
+router.route("/:name").get(getSchool);
 
 export default router
