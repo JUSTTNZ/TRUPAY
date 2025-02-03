@@ -13,7 +13,7 @@ import { userRegisterValidator } from "../middlewares/validators.js";
 const router = Router();
 
 //test endpoint
-router.post("/register", userRegisterValidator, registerUser);
+router.route("/register").post(userRegisterValidator, registerUser);
 
 router.route("/login").post(loginUser)
 
