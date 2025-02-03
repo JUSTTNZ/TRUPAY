@@ -38,6 +38,16 @@ const removeBooks = asyncHandler(async(req, res) => {
 
     const book = await Book.findById(bookId).populate('title level')
 
+    if(!book) {
+        throw new ApiError(404, "Book not found")
+    }
+
+    await book.deleteOne();
+    return res
+    .status(200
+    .json(new ApiResponse(201, null, "Book deleted successfully"))
+    )
+
 })
 
 
