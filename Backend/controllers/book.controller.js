@@ -52,5 +52,6 @@ const removeBooks = asyncHandler(async(req, res) => {
 
 
 export {
-    addBooks
+    addBooks,
+    removeBooks
 }
