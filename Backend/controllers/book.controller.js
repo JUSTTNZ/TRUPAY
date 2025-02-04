@@ -73,7 +73,7 @@ const getAllBooks = asyncHandler(async(req, res) => {
 
 
     const books = await Book.find().populate('school department level')
-    if(req.user.level._id.toString() !== book.level._id.toString()) {
+    if(req.user.level._id.toString() !== books.level._id.toString()) {
         throw new ApiError(401, "Cant access books")
     }
 
