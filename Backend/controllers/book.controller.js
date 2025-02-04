@@ -42,12 +42,11 @@ const removeBooks = asyncHandler(async(req, res) => {
         throw new ApiError(404, "Book not found")
     }
 
+    const bookTitle = book.title
     await book.deleteOne();
     return res
-    .status(200
-    .json(new ApiResponse(201, null, "Book deleted successfully"))
-    )
-
+    .status(200)
+    .json(new ApiResponse(201, null, `${bookTitle} deleted successfully`))
 })
 
 
