@@ -9,7 +9,6 @@ const addBooks = async (req, res, next) => {
 
         const bookObject = req.body;
 
-        // Create book
         const book = await BookService.createBook(bookObject);
 
         return res.status(201).json(new ApiResponse(201, "Book created successfully", book));

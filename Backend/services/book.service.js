@@ -33,17 +33,21 @@ class BookService {
             const levelDoc = await this._Level.findById(level).select("name");
 
             // Add the book reference to related collections
-            await this._School.updateOne(
+            await this._School.findOneAndUpdate(
                 { _id: school },
-                { $push: { books: { title: book.title, departmentName: departmentDoc?.name, levelName: levelDoc?.name } } }
+                { $push: { books: { title: book.title, departmentName: departmentDoc.name, levelName: levelDoc.name } } },
+                { new: true }
             );
+            
+            
 
-            await this._Department.updateOne(
+            await this._Department.findOneAndUpdate(
                 { _id: department },
-                { $push: { books: { title: book.title, levelName: levelDoc?.name } } }
+                { $push: { books: { title: book.title, levelName: levelDoc.name } } },
+                { new: true }
             );
 
-            await this._Level.updateOne(
+            await this._Level.findOneAndUpdate(
                 { _id: level },
                 { $push: { books: { 
                             title: book.title, 
@@ -53,7 +57,8 @@ class BookService {
                             stock_quantity: book.stock_quantity 
                         } 
                     } 
-                }
+                },
+                { new: true }
             );
 
             return book;
