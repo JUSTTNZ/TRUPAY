@@ -2,32 +2,22 @@ import { Book } from '../models/book.model.js'
 import { asyncHandler } from "../utils/asyncHandler.js"
 import { ApiError } from "../utils/ApiError.js"
 import { ApiResponse } from "../utils/ApiResponse.js"
+import BookService from "../services/book.service.js";
 
-const addBooks = asyncHandler(async(req, res) => {
+const addBooks = async (req, res, next) => {
+    try {
 
-    const { title, author, description, price, stock_quantity, school, department, level} = req.body;
+        const bookObject = req.body;
 
-    if(
-        [title, author, description, price, stock_quantity, school, department, level].some((field) => field?.trim() === "")
-    ) {
-        throw new ApiError(401, "All fields are required")
+        // Create book
+        const book = await BookService.createBook(bookObject);
+
+        return res.status(201).json(new ApiResponse(201, "Book created successfully", book));
+    } catch (error) {
+        console.error("Error adding:", error);
+        return res.status(500).json({ message: "An error occurred while adding book", error: error.message });
     }
-
-    const newBook = await Book.create({
-        title, 
-        author, 
-        description, 
-        price, 
-        stock_quantity, 
-        school, 
-        department, 
-        level
-    })
-
-    return res
-    .status(200)
-    .json(new ApiResponse(201, newBook, "Book added successfully"))
-})
+};
 
 const removeBooks = asyncHandler(async(req, res) => {
     const {bookId} = req.params

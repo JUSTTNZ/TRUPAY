@@ -3,20 +3,45 @@ import { School } from '../models/school.model.js';
 import { Department } from '../models/department.model.js';
 import { Level } from '../models/levels.model.js';
 
-const bookValidator = async (req, _res, next) => {
+
+const bookValidator = async (req, res, next) => {
     const bookSchema = Joi.object({
         title: Joi.string().required(),
         author: Joi.string().required(),
         description: Joi.string().required(),
-        //test will pass if the value(when price is a string) can be converted to a number.
         price: Joi.number().required(),
-        //test will pass if the value(when stock is a string) can be converted to a number.
-        stock: Joi.number().required(),
-    })
+        stock_quantity: Joi.number().required(),
+        school: Joi.string().required(),
+        department: Joi.string().required(),
+        level: Joi.string().required()
+    });
 
-    await bookSchema.validateAsync(req.body, { abortEarly: false });
-    next()
-}
+    try {
+        await bookSchema.validateAsync(req.body, { abortEarly: false });
+
+        // Fetch the documents based on names
+        const schoolDoc = await School.findOne({ name: req.body.school.trim() });
+        const departmentDoc = await Department.findOne({ name: req.body.department.trim() });
+        const levelDoc = await Level.findOne({ name: req.body.level.trim() });
+
+        if (!schoolDoc || !departmentDoc || !levelDoc) {
+            return res.status(400).json({ message: "Invalid school, department, or level" });
+        }
+
+        // Transform them into objects with _id and name
+        req.body.school = { _id: schoolDoc._id, name: schoolDoc.name };
+        req.body.department = { _id: departmentDoc._id, name: departmentDoc.name };
+        req.body.level = { _id: levelDoc._id, name: levelDoc.name };
+
+        next();
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ message: "Validation error occurred", errors: error.message });
+    }
+};
+
+
+
 
 
 const categoryValidator = async (req, _res, next) => {
