@@ -13,6 +13,11 @@ const schoolSchema = new Schema({
         fullname: String,
         departmentName: String,
         levelName: String
+    }],
+    books: [{ 
+        title: String, 
+        departmentName: String, 
+        levelName: String 
     }]
 }, { opts })
 
