@@ -26,21 +26,19 @@ const bookSchema = new Schema({
         type: Number,
         required: [true, "price is required"],
     },
-    school_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "School",
-        required: [true, "school_id is required"]
+    school: {
+        _id: { type: mongoose.Schema.Types.ObjectId, ref: "School", required: true },
+        name: { type: String, required: true },
     },
-    department_id: {
-        type: mongoose.Schema.ObjectId,
-        ref: "Department",
-        required: [true, "department_id is required"]
+    department: {
+        _id: { type: mongoose.Schema.Types.ObjectId, ref: "Department", required: true },
+        name: { type: String, required: true },
     },
     level: {
-        type: String,
-        required: [true, "level is required"]
-    }
+        _id: { type: mongoose.Schema.Types.ObjectId, ref: "Level", required: true },
+        name: { type: String, required: true },
+    },
 }, opts)
 
 
-export default mongoose.model("Book", bookSchema);
+export const Book = mongoose.model("Book", bookSchema);

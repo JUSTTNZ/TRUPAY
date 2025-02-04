@@ -21,6 +21,10 @@ const departmentSchema = new Schema({
     users: [{
         fullname: String,
         levelName: String
+    }],
+    books: [{ 
+        title: String, 
+        levelName: String 
     }]
 }, opts)
 

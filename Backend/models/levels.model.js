@@ -26,6 +26,13 @@ const levelSchema = new mongoose.Schema({
     users: [{
         fullname: String
     }],
+    books: [{ 
+        title: String, 
+        author: String, 
+        description: String, 
+        price: Number, 
+        stock_quantity: Number 
+    }]
 }, { timestamps: true });
 
 const Level = mongoose.model('Level', levelSchema);
