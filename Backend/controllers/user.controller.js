@@ -27,11 +27,9 @@ const generateAccessAndRefreshToken = async (userId) => {
 //test endpoint
 const registerUser = async (req, res, next) => {
     try {
-        // Validate user input and convert school/department/level to ObjectIds
 
         const userObject = req.body;
 
-        // Create user
         const user = await userService.register(userObject);
 
         return res.status(201).json(new ApiResponse(201, "User created successfully", user));
