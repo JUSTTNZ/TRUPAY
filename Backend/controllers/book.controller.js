@@ -59,9 +59,9 @@ const getBook = asyncHandler(async(req, res) => {
             throw new ApiError(404, "Book not found")
         }
     
-        if(user.level._id.toString() !== book.level._id.toString()) {
+        if(user.department._id.toString() !== book.department._id.toString() && user.level._id.toString() !== book.level._id.toString()) {
             
-            throw new ApiError(401, "You can only access books in your department")
+            throw new ApiError(401, "You can only access books in your school, department or level")
         }
         return res
         .status(200)
