@@ -53,7 +53,7 @@ const getBook = asyncHandler(async(req, res) => {
             throw new ApiError(404, "User not found")
         }
     
-        const book = await Book.findOne({title: new RegExp(`^${title}$`, 'i')}).select('author, description, price, stock_quantity')
+        const book = await Book.findOne({title: new RegExp(`^${title}$`, 'i')}).select('level').populate('author description price stock_quantity')
     
         if(!book) {
             throw new ApiError(404, "Book not found")
@@ -65,7 +65,7 @@ const getBook = asyncHandler(async(req, res) => {
         }
         return res
         .status(200)
-        .json(new ApiResponse(201, book, "Book successfully uploaded"))
+    .json(new ApiResponse(201, {book}, "Book successfully uploaded"))
     } catch (error) {
         console.log(error)
         throw new ApiError(400, "An error occurred")
