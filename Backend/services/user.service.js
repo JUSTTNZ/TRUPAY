@@ -22,6 +22,10 @@ class UserService {
                 throw new ApiError(400, "User already exists");
             }
 
+            const isFirstAccount  = await this._User.countDocuments({}) === 0
+
+            userObject.role = isFirstAccount ? 'admin' : 'user'
+
             // Create the user
             const user = await this._User.create(userObject);
             if (!user) {
