@@ -5,7 +5,7 @@ import { ApiResponse } from "../utils/ApiResponse.js"
 import BookService from "../services/book.service.js";
 import { User } from '../models/users.models.js';
 
-const addBooks = async (req, res, next) => {
+const addBooks = asyncHandler(async (req, res, next) => {
     try {
 
         const bookObject = req.body;
@@ -17,7 +17,7 @@ const addBooks = async (req, res, next) => {
         console.error("Error adding:", error);
         return res.status(500).json({ message: "An error occurred while adding book", error: error.message });
     }
-};
+});
 
 const removeBooks = asyncHandler(async(req, res) => {
     const {bookId} = req.params
@@ -36,34 +36,40 @@ const removeBooks = asyncHandler(async(req, res) => {
     await book.deleteOne();
     return res
     .status(200)
-    .json(new ApiResponse(201, null, `${bookTitle} deleted successfully`))
+    .json(new ApiResponse(201, `${bookTitle} deleted successfully`))
 })
 
 const getBook = asyncHandler(async(req, res) => {
-    const { title} = req.params
-
-    if(!title) {
-        throw new ApiError(401, "Title field is required")
+    try {
+        const { title} = req.params
+    
+        if(!title) {
+            throw new ApiError(401, "Title field is required")
+        }
+    
+        const user = await User.findById(req.user?._id).populate('school department level')
+    
+        if(!user) {
+            throw new ApiError(404, "User not found")
+        }
+    
+        const book = await Book.findOne({title: new RegExp(`^${title}$`, 'i')}).select('author, description, price, stock_quantity')
+    
+        if(!book) {
+            throw new ApiError(404, "Book not found")
+        }
+    
+        if(user.level._id.toString() !== book.level._id.toString()) {
+            
+            throw new ApiError(401, "You can only access books in your department")
+        }
+        return res
+        .status(200)
+        .json(new ApiResponse(201, book, "Book successfully uploaded"))
+    } catch (error) {
+        console.log(error)
+        throw new ApiError(400, "An error occurred")
     }
-
-    const user = await User.findById(req.user?._id).populate('school department level')
-
-    if(!user) {
-        throw new ApiError(404, "User not found")
-    }
-
-    const book = await Book.findOne({title: new RegExp(`^${title}$`, 'i')}).select('author, description, price, stock_quantity')
-
-    if(!book) {
-        throw new ApiError(404, "Book not found")
-    }
-
-    if(user.level._id.toString() !== book.level._id.toString()) {
-        throw new ApiError(401, "You can only access books in your department")
-    }
-    return res
-    .status(200)
-    .json(new ApiResponse(201, book, "Book successfully uploaded"))
 })
 
 const getAllBooks = asyncHandler(async(req, res) => {
