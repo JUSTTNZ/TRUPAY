@@ -59,8 +59,12 @@ const getBook = asyncHandler(async(req, res) => {
         if(!book) {
             throw new ApiError(404, "Book not found")
         }
+
+        if (!book.department || !book.level) {
+            throw new ApiError(400, "Book department or level information is missing");
+        }
     
-        if(user.department._id.toString() !== book.department._id.toString() && user.level._id.toString() !== book.level._id.toString()) {
+        if(user.department._id.toString() !== book.department._id.toString() || user.level._id.toString() !== book.level._id.toString()) {
             
             throw new ApiError(401, "You can only access books in your school, department or level")
         }
@@ -69,7 +73,7 @@ const getBook = asyncHandler(async(req, res) => {
         .json(new ApiResponse(201, {book}, "Book successfully uploaded"))
     } catch (error) {
         console.log(error)
-        throw new ApiError(400, "An error occurred")
+        throw new ApiError(400, error, "An error occurred")
     }
 })
 
