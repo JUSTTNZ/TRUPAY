@@ -96,7 +96,7 @@ const getAllBooks = asyncHandler(async(req, res) => {
     
         return res
         .status(201)
-        .json(new ApiResponse(201, {userBooks: filteredBoooks}, "Books successfully Uploaded"))
+        .json(new ApiResponse(201, {userBooks: filteredBooks}, "Books successfully Uploaded"))
     } catch (error) {
         console.log(error)
         throw new ApiError(400, "An error occurred")
