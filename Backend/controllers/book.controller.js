@@ -78,19 +78,29 @@ const getBook = asyncHandler(async(req, res) => {
 })
 
 const getAllBooks = asyncHandler(async(req, res) => {
-    if(!req.user) {
-        throw new ApiError(401, "User not found")
+    try {
+        if(!req.user) {
+            throw new ApiError(401, "User not found")
+        }
+    
+    
+        const books = await Book.find().populate('school department level').select('-school -department -level')
+
+        const userBooks = books.filter((book) => book.department._id.toString() === req.user.department._id.toString() && book.level._id.toString() === req.user.level._id.toString())
+
+        if (userBooks.length === 0) {
+            throw new ApiError(401, "Cannot access books");
+        }
+
+        const filteredBooks = userBooks.map(({school, department, level, ...book}) => book)
+    
+        return res
+        .status(201)
+        .json(new ApiResponse(201, {userBooks: filteredBoooks}, "Books successfully Uploaded"))
+    } catch (error) {
+        console.log(error)
+        throw new ApiError(400, "An error occurred")
     }
-
-
-    const books = await Book.find().populate('school department level')
-    if(req.user.level._id.toString() !== books.level._id.toString()) {
-        throw new ApiError(401, "Cant access books")
-    }
-
-    return res
-    .status(201)
-    .json(new ApiResponse(201, books, "Books successfully Uploaded"))
 })
 
 
