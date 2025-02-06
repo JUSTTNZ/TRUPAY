@@ -51,7 +51,7 @@ const getAllSchoolDepartments = asyncHandler(async(req, res) => {
         }
 
         const schoolId = user.school._id
-        const departments = await Department.find(schoolId).select('-users')
+        const departments = await Department.find({school: schoolId}).select('-users')
 
         return res 
         .status(200)
