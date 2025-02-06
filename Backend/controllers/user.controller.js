@@ -24,7 +24,7 @@ const generateAccessAndRefreshToken = async (userId) => {
     }
 }
 
-//test endpoint
+
 const registerUser = async (req, res, next) => {
     try {
 
