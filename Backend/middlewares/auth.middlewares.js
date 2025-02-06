@@ -31,16 +31,20 @@ export const verifyJWT = asyncHandler(async(req, _, next) => {
 export const adminAuth = asyncHandler(async(req, res, next) => {
 
     try {
-        const token = req.header("Authorization")
+        const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")
+        // console.log(token);
+        // console.log("Cookies:", req.cookies);
+        // console.log("Authorization Header:", req.header("Authorization"));
+
 
         if(!token) {
             throw new ApiError(401, "Access denied, no token provided")
         }
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user =  decoded
+        const decodedUser = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        req.user =  decodedUser
 
-        const user = await User.findById(req.user.id);
+        const user = await User.findById(req.user._id);
         if (!user) {
             throw new ApiError(404, "User not found");
         }
