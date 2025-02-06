@@ -4,8 +4,8 @@ import { getAllDepartments, getAllSchoolDepartments, getDepartment } from '../co
 
 const router = Router()
 
-router.route("/").get(getAllDepartments)
-router.route("/schooldepartment").get(verifyJWT, adminAuth, getAllSchoolDepartments)
-router.route("/:name").get(getDepartment)
+router.route("/").get(verifyJWT, adminAuth, getAllDepartments)
+router.route("/schooldepartment").get(verifyJWT, getAllSchoolDepartments)
+router.route("/:name").get(verifyJWT, getDepartment)
 
 export default router

@@ -92,7 +92,7 @@ const getDepartment = asyncHandler(async(req, res) => {
         .json(new ApiResponse(201, department, "Department uploaded successfully"))
     } catch (error) {
         console.log(error.message);
-        throw new ApiError(400, "You can only access your own department")
+        throw new ApiError(400, "An error occurred")
     }
 })
 
