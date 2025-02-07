@@ -1,41 +1,64 @@
-import { Comment } from "../models/comment.model.js" 
+import { Comment } from "../models/comment.model.js";
 import { Book } from "../models/book.model.js";
-import { User } from "../models/users.models.js"
+import { User } from "../models/users.models.js";
 import { ApiError } from "../utils/ApiError.js";
 
-class CommentService  {
-
+class CommentService {
     constructor() {
-        this._Comment = Comment
-        this._Book = Book
-        this._User = User
+        this._Comment = Comment;
+        this._Book = Book;
+        this._User = User;
     }
 
-    async createComment (commentObject) {
-
+    async createComment(commentObject, bookId, userId) { // Accept bookId & userId separately
         try {
-            
-            const { book } = commentObject
-            let loggedInUser = await User.findById(req.user._id)
-            loggedInUser = commentObject.user._id
+            const { comment, rating } = commentObject;
 
-            const newComment = await Comment.create(commentObject)
-
-            if(!newComment) {
-                throw new ApiError(400, "An error occurred")
+            // Ensure the user exists
+            const loggedInUser = await this._User.findById(userId);
+            if (!loggedInUser) {
+                throw new ApiError(404, "User not found");
             }
 
-            await this._Book.findOneAndUpdate(
-                {_id: book},
-                {$push: {comments: {user: Comment.user, commentRating: Comment.rating, newComment: Comment.comment } }},
-                {new: true}
-            )
+            // Ensure the book exists
+            const bookExists = await this._Book.findById(bookId);
+            if (!bookExists) {
+                throw new ApiError(404, "Book not found");
+            }
 
-            return newComment
+            // Create new comment
+            const newComment = await this._Comment.create({
+                user: { _id: userId, name: loggedInUser.name }, // Include user name
+                book: { _id: bookId, title: bookExists.title }, // Include book title
+                comment,
+                rating
+            });
+
+            if (!newComment) {
+                throw new ApiError(400, "An error occurred while creating comment.");
+            }
+
+            // Add comment to book's comments array
+            await this._Book.findByIdAndUpdate(
+                bookData._id,
+                {
+                    $push: {
+                        comments: {
+                            user: newComment.user,
+                            commentRating: newComment.rating,
+                            comment: newComment.comment
+                        }
+                    }
+                },
+                { new: true }
+            );
+
+            return newComment;
         } catch (error) {
-            throw new ApiError(400, "An error occurred, cant comment on this book")
+            console.error(error);
+            throw new ApiError(400, "An error occurred, can't comment on this book.");
         }
     }
 }
 
-export default new CommentService()
+export default new CommentService();

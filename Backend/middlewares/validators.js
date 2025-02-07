@@ -58,8 +58,6 @@ const commentValidator = async (req, _res, next) => {
     const commentSchema = Joi.object({
         comment: Joi.string().required(),
         rating: Joi.number().required(),
-        book: Joi.string().required(),
-        user: Joi.string().required()
     })
 
    try {

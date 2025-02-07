@@ -1,25 +1,23 @@
-import { Comment } from '../models/comment.model.js' 
-import { Book } from '../models/book.model.js'
-import { asyncHandler } from "../utils/asyncHandler.js"
-import { ApiError } from "../utils/ApiError.js"
-import { ApiResponse } from "../utils/ApiResponse.js"
-import { User } from '../models/users.models.js';
-import commentService from '../services/comment.service.js'
+import CommentService from "../services/comment.service.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { ApiError } from "../utils/ApiError.js";
 
-const addComments = asyncHandler(async(req, res) => {
-    const { book } = req.params
-    if(!book) {
-        throw new ApiError(401, "bookId needed")
+export const addComments = async (req, res, next) => {
+    try {
+        const { bookId } = req.params; // Get book ID from URL params
+        const userId = req.user._id; // Get user ID from logged-in user
+        const { comment, rating } = req.body; // Get comment & rating from request body
+
+        // Ensure both comment and rating are provided
+        if (!comment || !rating) {
+            throw new ApiError(400, "Comment and rating are required");
+        }
+
+        // Call service to create the comment
+        const newComment = await CommentService.createComment({ comment, rating }, bookId, userId);
+
+        return res.status(201).json(new ApiResponse(201, newComment, "Comment added successfully"));
+    } catch (error) {
+        next(error); // Pass error to the error-handling middleware
     }
-    const commentObject = req.body
-
-    const comment = await commentService.createComment(commentObject)
-
-    return res
-        .status(200)
-        .json(new ApiResponse(200, comment, "comment successfully added "))  
-})
-
-export {
-    addComments,
-}
+};
