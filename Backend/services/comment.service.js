@@ -15,10 +15,10 @@ class CommentService {
             const { comment, rating } = commentObject;
     
             // Ensure the user exists and get user name
-            const loggedInUser = await this._User.findById(userId).select("_id name");
+            const loggedInUser = await this._User.findById(userId).select("_id username");
             console.log("Fetched user:", loggedInUser); // Debugging log
     
-            if (!loggedInUser || !loggedInUser.name) {
+            if (!loggedInUser || !loggedInUser.username) {
                 throw new ApiError(404, "User not found or user name missing");
             }
     
@@ -32,7 +32,7 @@ class CommentService {
     
             // Create new comment
             const newComment = await this._Comment.create({
-                user: { _id: userId, name: loggedInUser.name },
+                user: { _id: userId, username: loggedInUser.username },
                 book: { _id: bookId, title: bookExists.title },
                 comment,
                 rating
