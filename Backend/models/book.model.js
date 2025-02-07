@@ -1,3 +1,4 @@
+
 import mongoose, { Schema } from "mongoose";
 
 const opts = { timestamps: true }
@@ -38,6 +39,11 @@ const bookSchema = new Schema({
         _id: { type: mongoose.Schema.Types.ObjectId, ref: "Level", required: true },
         name: { type: String, required: true },
     },
+    comments: [{
+        user: String,
+        newComment: String,
+        commentRating: String
+    }]
 }, opts)
 
 

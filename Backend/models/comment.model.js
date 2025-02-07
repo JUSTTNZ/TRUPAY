@@ -19,7 +19,7 @@ const commentSchema = new Schema({
         type: Number,
         required: [true, "rating is required."]
     }
-})
+}, opts)
 
 
-export default mongoose.model("Comment", commentSchema);
+export const Comment = mongoose.model("Comment", commentSchema);

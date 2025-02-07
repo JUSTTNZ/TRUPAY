@@ -14,7 +14,9 @@ class CommentService  {
     async createComment (commentObject) {
 
         try {
-            const loggedInUser = await User.findById(req.user._id)
+            
+            const { book } = commentObject
+            let loggedInUser = await User.findById(req.user._id)
             loggedInUser = commentObject.user._id
 
             const newComment = await Comment.create(commentObject)
@@ -22,6 +24,12 @@ class CommentService  {
             if(!newComment) {
                 throw new ApiError(400, "An error occurred")
             }
+
+            await this._Book.findOneAndUpdate(
+                {_id: book},
+                {$push: {comments: {user: Comment.user, commentRating: Comment.rating, newComment: Comment.comment } }},
+                {new: true}
+            )
 
             return newComment
         } catch (error) {
