@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { verifyJWT } from '../middlewares/auth.middlewares.js'
+import { verifyJWT, adminAuth } from '../middlewares/auth.middlewares.js'
 import {
     registerUser,
     loginUser,

@@ -50,8 +50,8 @@ const getAllSchoolDepartments = asyncHandler(async(req, res) => {
             throw new ApiError(401, "User not found")
         }
 
-        schoolId = user.school._id
-        const departments = await Department.find(schoolId).select('-users')
+        const schoolId = user.school._id
+        const departments = await Department.find({school: schoolId}).select('-users -books')
 
         return res 
         .status(200)

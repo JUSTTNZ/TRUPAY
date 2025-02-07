@@ -57,11 +57,19 @@ const categoryValidator = async (req, _res, next) => {
 const commentValidator = async (req, _res, next) => {
     const commentSchema = Joi.object({
         comment: Joi.string().required(),
-        rating: Joi.number().required()
+        rating: Joi.number().required(),
+        book: Joi.string().required(),
+        user: Joi.string().required()
     })
 
-    await commentSchema.validateAsync(req.body, { abortEarly: false });
-    next();
+   try {
+     await commentSchema.validateAsync(req.body, { abortEarly: false });
+
+
+     next();
+   } catch (error) {
+    
+   }
 }
 
 const departmentValidator = async (req, _res, next) => {
