@@ -3,15 +3,13 @@ import mongoose, { Schema } from "mongoose";
 const opts = { timestamps: true };
 
 const commentSchema = new Schema({
-    user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: [true, "user_id is required."],
-        ref: "User"
+    user: {
+        _id: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+        name: { type: String, required: true },
     },
-    book_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: [true, "book_id is required."],
-        ref: "Book"
+    book: {
+        _id: { type: mongoose.Schema.Types.ObjectId, ref: "Book", required: true },
+        title: { type: String, required: true },
     },
     comment: {
         type: String,
