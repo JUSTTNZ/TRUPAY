@@ -1,8 +1,8 @@
 import CommentService from "../services/comment.service.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
-
-export const addComments = async (req, res, next) => {
+ const addComments = asyncHandler(async (req, res, next) => {
     try {
         const { bookId } = req.params; // Get book ID from URL params
         //console.log("User from JWT:", req.user); 
@@ -21,4 +21,8 @@ export const addComments = async (req, res, next) => {
     } catch (error) {
         next(error); // Pass error to the error-handling middleware
     }
-};
+});
+
+export {
+    addComments
+}
