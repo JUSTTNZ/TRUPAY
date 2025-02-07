@@ -24,13 +24,9 @@ class CommentService  {
                 throw new ApiError(400, "An error occurred")
             }
 
-            return res
-                .status(200)
-                .json(new ApiResponse(201, ))
-
-
+            return newComment
         } catch (error) {
-            
+            throw new ApiError(400, "An error occurred, cant comment on this book")
         }
     }
 }
