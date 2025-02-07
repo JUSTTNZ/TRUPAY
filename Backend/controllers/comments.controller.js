@@ -5,6 +5,7 @@ import { ApiError } from "../utils/ApiError.js";
 export const addComments = async (req, res, next) => {
     try {
         const { bookId } = req.params; // Get book ID from URL params
+        //console.log("User from JWT:", req.user); 
         const userId = req.user._id; // Get user ID from logged-in user
         const { comment, rating } = req.body; // Get comment & rating from request body
 
