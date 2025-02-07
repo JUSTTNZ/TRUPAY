@@ -14,6 +14,7 @@ class CommentService  {
     async createComment (commentObject) {
 
         try {
+            
             const { user, book, rating, comment  } = commentObject
             const loggedInUser = await User.findById(req.user._id)
             loggedInUser = commentObject.user._id
