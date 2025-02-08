@@ -3,6 +3,8 @@ import { Comment } from '../models/comment.model.js';
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
+import { mongoose } from "mongoose";
+
 
 const addComments = asyncHandler(async (req, res, next) => {
     try {
@@ -58,20 +60,31 @@ const deleteComments = asyncHandler(async(req, res) => {
 const getAllComments = asyncHandler(async(req, res) => {
     try {
         const { bookId } = req.params
+        console.log("Book ID received:", bookId);
 
         if(!bookId) {
             throw new ApiError(400, "BookId is required")
         }
-        const comment = await Comment.find(bookId).populate('book user').select('book')
+
+        if (!mongoose.Types.ObjectId.isValid(bookId)) {
+            return next(new ApiError(400, "Invalid BookId format"));
+        }
+
+        const comments = await Comment.find({ book: bookId })
+            .populate("book user", "title username")
+            .select("comment rating");
         
-        if(!comment) {
+        console.log("Comments fetched:", comments);
+        
+        if(!comments || comments.length === 0) {
             throw new ApiError(404, "Comment not found")
         }
 
         return res
             .status(200)
-            .json(new ApiResponse(201, comment, "All comments retrieved"))  
+            .json(new ApiResponse(200, comments, "All comments retrieved"))  
     } catch (error) {
+        console.log(error);
         throw new ApiError(400, "An error occurred")
     }
     
@@ -79,5 +92,6 @@ const getAllComments = asyncHandler(async(req, res) => {
 
 export {
     addComments,
-    deleteComments
+    deleteComments,
+    getAllComments
 }
