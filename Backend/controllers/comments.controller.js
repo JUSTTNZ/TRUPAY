@@ -55,6 +55,28 @@ const deleteComments = asyncHandler(async(req, res) => {
     }
 })
 
+const getAllComments = asyncHandler(async(req, res) => {
+    try {
+        const { bookId } = req.params
+
+        if(!bookId) {
+            throw new ApiError(400, "BookId is required")
+        }
+        const comment = await Comment.find(bookId).populate('book user').select('book')
+        
+        if(!comment) {
+            throw new ApiError(404, "Comment not found")
+        }
+
+        return res
+            .status(200)
+            .json(new ApiResponse(201, comment, "All comments retrieved"))  
+    } catch (error) {
+        throw new ApiError(400, "An error occurred")
+    }
+    
+})
+
 export {
     addComments,
     deleteComments
