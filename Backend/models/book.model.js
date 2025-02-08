@@ -40,9 +40,8 @@ const bookSchema = new Schema({
         name: { type: String, required: true },
     },
     comments: [{
-        user: String,
-        newComment: String,
-        commentRating: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment"
     }]
 }, opts)
 

@@ -37,6 +37,16 @@ class CommentService {
                 comment,
                 rating
             });
+            
+            if (!bookExists.comments) {
+                bookExists.comments = [];  // Initialize the comments array if it doesn't exist
+            }
+    
+            // Push the new comment ID into the book's comments array
+            bookExists.comments.push(newComment._id);
+    
+            // Save the updated book
+            await bookExists.save();
     
             return newComment;
         } catch (error) {
