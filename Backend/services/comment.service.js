@@ -14,9 +14,9 @@ class CommentService {
         try {
             const { comment, rating } = commentObject;
     
-            // Ensure the user exists and get user name
+          
             const loggedInUser = await this._User.findById(userId).select("_id username");
-            console.log("Fetched user:", loggedInUser); // Debugging log
+            console.log("Fetched user:", loggedInUser); 
     
             if (!loggedInUser || !loggedInUser.username) {
                 throw new ApiError(404, "User not found or user name missing");
@@ -24,7 +24,7 @@ class CommentService {
     
             // Ensure the book exists
             const bookExists = await this._Book.findById(bookId).select("_id title");
-            console.log("Fetched book:", bookExists); // Debugging log
+            console.log("Fetched book:", bookExists); 
     
             if (!bookExists || !bookExists.title) {
                 throw new ApiError(404, "Book not found or book title missing");
