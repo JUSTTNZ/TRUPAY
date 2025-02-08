@@ -1,8 +1,11 @@
 import CommentService from "../services/comment.service.js";
 import { Comment } from '../models/comment.model.js';
+import { Book } from '../models/book.model.js'; 
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
+import { mongoose } from "mongoose";
+
 
 const addComments = asyncHandler(async (req, res, next) => {
     try {
@@ -55,7 +58,43 @@ const deleteComments = asyncHandler(async(req, res) => {
     }
 })
 
+const getAllComments = asyncHandler(async (req, res) => {
+    try {
+        const { bookId } = req.params;
+
+        if (!bookId) {
+            throw new ApiError(400, "BookId is required");
+        }
+
+        // Retrieve the book by ID and populate the comments
+        const book = await Book.findById(bookId).populate({
+            path: 'comments',
+            model: 'Comment',
+            populate: {
+                path: 'user',
+                model: 'User'
+            }
+        });
+
+        if (!book) {
+            throw new ApiError(404, "Book not found");
+        }
+
+        if (!book.comments || book.comments.length === 0) {
+            throw new ApiError(404, "No comments found for this book");
+        }
+
+        return res.status(200).json(new ApiResponse(200, book.comments, "All comments retrieved"));
+    } catch (error) {
+        console.log(error);
+        throw new ApiError(400, "An error occurred");
+    }
+});
+
+
+
 export {
     addComments,
-    deleteComments
+    deleteComments,
+    getAllComments
 }
