@@ -39,7 +39,7 @@ class CommentService {
             });
             
             if (!bookExists.comments) {
-                bookExists.comments = [];  // Initialize the comments array if it doesn't exist
+                bookExists.comments = []; 
             }
     
             // Push the new comment ID into the book's comments array
