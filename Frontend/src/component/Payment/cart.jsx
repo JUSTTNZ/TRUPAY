@@ -151,7 +151,7 @@ export const Cart= () => {
                                 <div className='flex justify-between'>
                                     <div className='w-50 pr-5'>
                                         <label htmlFor="name" className='font-medium text-[#20px]'>Name on card</label>
-                                        <div className=' pt-3'>
+                                        <div className=' pt-2'>
                                             <input type="text" 
                                             placeholder='Name'
                                             className='w-full bg-[#10375e] p-2 rounded-md outline-none text-gray-300'
@@ -161,8 +161,8 @@ export const Cart= () => {
                                     </div>
 
                                     <div className=' w-50 ml-5 pr-5'>
-                                        <label htmlFor="name" className='font-medium text-[#20px]'>Expiration Dtae</label>
-                                        <div className=' pt-3'>
+                                        <label htmlFor="name" className='font-medium text-[#20px]'>Expiration Date</label>
+                                        <div className=' pt-2'>
                                             <input type="text" 
                                             placeholder='1110 0000 5678 ****'
                                             className='w-full bg-[#10375e] p-2 rounded-md outline-none text-gray-300'
@@ -188,7 +188,7 @@ export const Cart= () => {
                                 </div>
                             </div>
                             
-                            <p className='flex text-center justify-center bg-[#10375e] py-2 my-3 rounded-md w-100 cursor-pointer hover:bg-[#10377a] text-[18px]'>Checkout</p>
+                            <p className='flex text-center justify-center bg-[#10375e] py-2 my-3 rounded-md w-100 cursor-pointer hover:bg-[#10377a] text-[18px] font-bold'>Checkout</p>
                         </form>
                     </div>
                 </div>
