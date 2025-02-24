@@ -113,9 +113,9 @@ export const Cart= () => {
                             </div>
                         </div>
                     </div>
-                    <div className='flex flex-col items-start w-120 bg-[#abde] pl-8 pt-8 rounded-md '>
-                        <p>Card Type</p>
-                        <div className='flex items-center space-x-15 '>
+                    <div className='flex flex-col items-start w-120 bg-[#ffee00e7] pl-8 pt-8 rounded-md pb-6 '>
+                        <p className='font-medium text-[#20px]'>Card Type</p>
+                        <div className='flex items-center space-x-15 py-5 pl-3'>
                             <img src={MasterCard} alt=""  />
                             <img src={VisaCard} alt="" />
                             <img src={VerveCard} alt="" />
@@ -123,12 +123,53 @@ export const Cart= () => {
                         </div>
 
                         <form action="">
-                            <div>
-                                <label htmlFor="name">Name on card</label>
-                                <input type="text" 
-                                    placeholder=''
-                                />
+                            <div className='space-y-5'>
+                                <div className=''>
+                                    <label htmlFor="name" className='font-medium text-[#20px]'>Name on card</label>
+                                    <div className='w-100 pt-1'>
+                                        <input type="text" 
+                                        placeholder='Name'
+                                        className='w-full bg-[#10375e] p-2 rounded-md outline-none text-gray-300'
+                                    />
+                                    </div>
+                                    
+                                </div>
+
+                                <div className=''>
+                                    <label htmlFor="name" className='font-medium text-[#20px]'>Card Number</label>
+                                    <div className='w-100 pt-1'>
+                                        <input type="text" 
+                                        placeholder='1110 0000 5678 ****'
+                                        className='w-full bg-[#10375e] p-2 rounded-md outline-none text-gray-300'
+                                    />
+                                    </div>
+                                    
+                                </div>
+                                <div className='flex justify-between gap-2'>
+                                    <div className=' mx- mr-3'>
+                                        <label htmlFor="name" className='font-medium text-[#20px]'>Name on card</label>
+                                        <div className=' pt-3'>
+                                            <input type="text" 
+                                            placeholder='Name'
+                                            className='w-full bg-[#10375e] p-2 rounded-md outline-none text-gray-300'
+                                            />
+                                        </div>
+                                    
+                                    </div>
+
+                                    <div className=' mr-3'>
+                                        <label htmlFor="name" className='font-medium text-[#20px]'>Card Number</label>
+                                        <div className=' pt-3'>
+                                            <input type="text" 
+                                            placeholder='1110 0000 5678 ****'
+                                            className='w-full bg-[#10375e] p-2 rounded-md outline-none text-gray-300'
+                                            />
+                                        </div>
+                                    
+                                    </div>
+                                </div>
                             </div>
+                            
                         </form>
                     </div>
                 </div>
