@@ -145,8 +145,8 @@ export const Cart= () => {
                                     </div>
                                     
                                 </div>
-                                <div className='flex justify-between gap-2'>
-                                    <div className=' mx- mr-3'>
+                                <div className='flex justify-between'>
+                                    <div className='w-50 pr-5'>
                                         <label htmlFor="name" className='font-medium text-[#20px]'>Name on card</label>
                                         <div className=' pt-3'>
                                             <input type="text" 
@@ -157,8 +157,8 @@ export const Cart= () => {
                                     
                                     </div>
 
-                                    <div className=' mr-3'>
-                                        <label htmlFor="name" className='font-medium text-[#20px]'>Card Number</label>
+                                    <div className=' w-50 ml-5 pr-5'>
+                                        <label htmlFor="name" className='font-medium text-[#20px]'>Expiration Dtae</label>
                                         <div className=' pt-3'>
                                             <input type="text" 
                                             placeholder='1110 0000 5678 ****'
@@ -166,6 +166,21 @@ export const Cart= () => {
                                             />
                                         </div>
                                     
+                                    </div>
+                                </div>
+
+                                <div className='space-x-3'>
+                                    <div className='flex justify-between'>
+                                        <p>Sum Total</p>
+                                        <p>N75000.00</p>
+                                    </div>
+                                    <div>
+                                        <p>Sum Total</p>
+                                        <p>N75000.00</p>
+                                    </div>
+                                    <div>
+                                        <p>Sum Total</p>
+                                        <p>N75000.00</p>
                                     </div>
                                 </div>
                             </div>
