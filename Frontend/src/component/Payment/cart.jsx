@@ -33,7 +33,7 @@ export const Cart= () => {
                             </div>
                         </div>
 
-                        <div className='flex mt-5 items-center space-x-10 bg-[#10375e] box-shadow shadow-xl py-2 px-3'>
+                        <div className='flex mt-5 mb-1 items-center space-x-10 bg-[#10375e] shadow-2xl shadow-gray-900 py-4 px-3'>
                             <div className=''>
                                 <img src={Book} alt="" className='w-12 h-12'/>
                             </div>
@@ -53,7 +53,8 @@ export const Cart= () => {
                             </div>
                         </div>
 
-                        <div className='flex mt-5 items-center space-x-10 bg-[#10375e] box-shadow shadow-xl py-2 px-3'>
+                        <div className='flex mt-5 mb-1 items-center space-x-10 bg-[#10375e] shadow-2xl shadow-gray-900 py-4 px-3'>
+
                             <div className=''>
                                 <img src={Book} alt="" className='w-12 h-12'/>
                             </div>
@@ -73,7 +74,8 @@ export const Cart= () => {
                             </div>
                         </div>
 
-                        <div className='flex mt-5 items-center space-x-10 bg-[#10375e] box-shadow shadow-xl py-2 px-3'>
+                        <div className='flex mt-5 mb-1 items-center space-x-10 bg-[#10375e] shadow-2xl shadow-gray-900 py-4 px-3'>
+
                             <div className=''>
                                 <img src={Book} alt="" className='w-12 h-12'/>
                             </div>
@@ -93,7 +95,8 @@ export const Cart= () => {
                             </div>
                         </div>
 
-                        <div className='flex mt-5 items-center space-x-10 bg-[#10375e] box-shadow shadow-xl py-2 px-3'>
+                        <div className='flex mt-5 mb-1 items-center space-x-10 bg-[#10375e] shadow-2xl shadow-gray-900 py-4 px-3'>
+
                             <div className=''>
                                 <img src={Book} alt="" className='w-12 h-12'/>
                             </div>
@@ -170,21 +173,22 @@ export const Cart= () => {
                                 </div>
 
                                 <div className='space-x-3'>
-                                    <div className='flex justify-between'>
+                                    <div className='flex justify-between pr-3 font-bold '>
                                         <p>Sum Total</p>
                                         <p>N75000.00</p>
                                     </div>
-                                    <div>
+                                    <div className='flex justify-between pr-3 font-bold '>
                                         <p>Sum Total</p>
                                         <p>N75000.00</p>
                                     </div>
-                                    <div>
+                                    <div className='flex justify-between pr-6 font-bold '>
                                         <p>Sum Total</p>
                                         <p>N75000.00</p>
                                     </div>
                                 </div>
                             </div>
                             
+                            <p className='flex text-center justify-center bg-[#10375e] py-2 my-3 rounded-md w-100 cursor-pointer hover:bg-[#10377a] text-[18px]'>Checkout</p>
                         </form>
                     </div>
                 </div>
