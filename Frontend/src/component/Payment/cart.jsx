@@ -136,7 +136,7 @@ export const Cart= () => {
                                 </div>
 
                                 <div className=''>
-                                    <label htmlFor="name" className='font-medium text-[#20px]'>Card Number</label>
+                                    <label htmlFor="name" className='font-medium text-[#20px]'>Expriration Number</label>
                                     <div className='w-100 pt-1'>
                                         <input type="text" 
                                         placeholder='1110 0000 5678 ****'
