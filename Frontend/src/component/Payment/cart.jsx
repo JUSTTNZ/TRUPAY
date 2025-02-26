@@ -161,7 +161,7 @@ export const Cart= () => {
                                         <label htmlFor="name" className='font-medium text-[#20px]'>Card Number</label>
                                         <div className=' pt-3'>
                                             <input type="text" 
-                                            placeholder='1110 0000 5678 ****'
+                                            placeholder='1110 0000 5678 *****'
                                             className='w-full bg-[#10375e] p-2 rounded-md outline-none text-gray-300'
                                             />
                                         </div>
