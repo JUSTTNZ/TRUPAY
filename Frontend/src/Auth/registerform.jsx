@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import img from '../assets/loginmage.png'
 
-export const LoginForm= () => {
+export const RegisterForm = () => {
 
     const [passwordVisible, setPasswordVisible] = useState(false);
     const togglePasswordVisibility = () => {
@@ -140,7 +140,7 @@ export const LoginForm= () => {
           <p className="text-[#EB8317] mb-1 text-[14px] font-normal font-outfit text-center mt-6">
             Don't have an account?
             <a
-              href="/register"
+              href="/"
               className="text-[#EB8317] text-[14px] font-normal font-outfit hover:underline ml-1 whitespace-nowrap"
             >
               Sign Up

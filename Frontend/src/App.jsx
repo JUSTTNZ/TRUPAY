@@ -3,6 +3,7 @@ import Login from "./Auth/login"
 import { Home } from "./pages/Home"
 import { Payment } from "./pages/Payment";
 import 'animate.css';
+import { RegisterForm } from "./Auth/registerform";
 
 function App() {
  
@@ -12,6 +13,7 @@ function App() {
 <Router>
   <Routes>
     <Route path="/" element={<Login />} />
+    <Route path="/register" element={<RegisterForm />} />
     <Route path="/home" element={<Home />} />
     <Route path="/payment" element={<Payment />} />
   </Routes>
