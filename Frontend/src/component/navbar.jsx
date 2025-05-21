@@ -62,7 +62,7 @@ export const Navbar = () => {
                 <NavLink to="/#" className={({isActive}) =>` ${isActive ? 'text-[#10375C]' :'text-white  '}  text-sm text-base  px-4 py-1 transition-colors duration-200   `}>Admin</NavLink>
             </li>
             <li className={`${menuOpen ? 'mb-3' : ''}`}>
-                <NavLink to="/#" className={({isActive}) => ` ${isActive ?'text-[#10375C] ':'text-white  '}  text-sm text-base  px-4 py-1 transition-colors duration-200    `} >Payment</NavLink>
+                <NavLink to="/payment" className={({isActive}) => ` ${isActive ?'text-[#10375C] ':'text-white  '}  text-sm text-base  px-4 py-1 transition-colors duration-200    `} >Payment</NavLink>
             </li>
             <li className={`${menuOpen ? 'mb-3' : ''}`}>
                 <NavLink to="/#" className={({isActive}) => ` ${isActive ?'text-[#10375C]':'text-white  '} text-sm text-base  px-4 py-1 transition-colors duration-200   `} >History</NavLink>
