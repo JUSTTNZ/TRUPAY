@@ -1,5 +1,5 @@
-import {  LoginForm } from "./loginform";
-const Login = () => {
+import { RegisterForm } from "./registerform";
+const Register = () => {
  
   
     return (
@@ -9,7 +9,7 @@ const Login = () => {
         }}>
 
         <div>
-           <LoginForm 
+           <RegisterForm
       
         />
         </div>
@@ -18,4 +18,4 @@ const Login = () => {
     );
   };
   
-  export default Login;
+  export default Register;

@@ -4,7 +4,7 @@ import { Home } from "./pages/Home"
 import { Payment } from "./pages/Payment";
 import { TransactionTable } from "./pages/History";
 import 'animate.css';
-import { RegisterForm } from "./Auth/registerform";
+import Register from "./Auth/register";
 
 function App() {
  
@@ -13,10 +13,10 @@ function App() {
 
 <Router>
   <Routes>
-    <Route path="/" element={<Login />} />
+    <Route path="/" element={<Home />} />
   
-    <Route path="/register" element={<RegisterForm />} />
-    <Route path="/home" element={<Home />} />
+    <Route path="/register" element={<Register />} />
+    <Route path="/login" element={<Login />} />
     <Route path="/payment" element={<Payment />} />
     <Route path="/history" element={<TransactionTable />} />
   </Routes>
